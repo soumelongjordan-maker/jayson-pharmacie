@@ -1,0 +1,2254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JAYSON HEALTH — Votre Santé, Notre Priorité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+/* ══════ TOKENS ══════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#020509;--deep:#071020;--navy:#0C1A30;--surface:#0F2040;
+  --card:#112448;--card2:#14284D;
+  --border:rgba(0,229,204,.1);--border2:rgba(255,255,255,.07);
+  --cyan:#00E5CC;--cyan-lt:#4DFFF0;--cyan-dim:rgba(0,229,204,.1);--cyan-mid:rgba(0,229,204,.18);
+  --green:#22C55E;--green-dim:rgba(34,197,94,.12);
+  --red:#FF5C7A;--red-dim:rgba(255,92,122,.1);
+  --amber:#FFB347;--amber-dim:rgba(255,179,71,.1);
+  --blue:#4DA6FF;--blue-dim:rgba(77,166,255,.1);
+  --purple:#B06EFF;--purple-dim:rgba(176,110,255,.1);
+  --snow:#F0F6FF;--text:#BDD4EE;--muted:#5A7A9A;--muted2:#2D4560;
+  --font-d:'DM Serif Display',Georgia,serif;
+  --font-b:'DM Sans',system-ui,sans-serif;
+  --r:14px;--r-lg:20px;--r-xl:28px;
+  --shadow:0 8px 32px rgba(0,0,0,.5);
+  --shadow-lg:0 20px 60px rgba(0,0,0,.65);
+  --glow:0 0 40px rgba(0,229,204,.15);
+  --sidebar-w:260px;
+}
+html{height:100%;overflow:hidden}
+body{font-family:var(--font-b);background:var(--void);color:var(--text);height:100%;overflow:hidden}
+::selection{background:var(--cyan);color:#000}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--cyan)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");}
+
+/* ══════ LOGIN PAGE ══════ */
+#loginPage{
+  position:fixed;inset:0;z-index:5000;display:flex;
+  background:var(--void);
+}
+#loginPage.hidden{display:none}
+.login-left{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 48px;position:relative;overflow:hidden;
+}
+.login-left::before{
+  content:'';position:absolute;top:-200px;left:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,204,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.login-left::after{
+  content:'';position:absolute;bottom:-150px;right:-100px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(34,197,94,.05) 0%,transparent 70%);
+  pointer-events:none;
+}
+/* login grid lines */
+.login-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,229,204,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,229,204,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.login-logo-wrap{
+  display:flex;align-items:center;gap:14px;margin-bottom:48px;
+  position:relative;z-index:1;
+}
+.login-logo-icon{
+  width:52px;height:52px;border-radius:15px;
+  background:linear-gradient(135deg,var(--cyan),#00B5A0);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-d);font-size:1.4rem;color:#000;font-weight:700;
+  box-shadow:0 0 30px rgba(0,229,204,.4);
+}
+.login-logo-name{font-family:var(--font-d);font-size:1.5rem;color:var(--snow)}
+.login-logo-sub{font-size:.72rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-top:3px}
+
+.login-form-wrap{
+  width:100%;max-width:420px;position:relative;z-index:1;
+}
+.login-title{
+  font-family:var(--font-d);font-size:2.2rem;color:var(--snow);
+  margin-bottom:8px;line-height:1.1;
+}
+.login-title em{font-style:italic;color:var(--cyan)}
+.login-sub{font-size:.9rem;color:var(--muted);margin-bottom:32px;line-height:1.6}
+
+.login-tabs{
+  display:flex;background:var(--navy);border-radius:var(--r);padding:4px;
+  margin-bottom:24px;border:1px solid var(--border2);
+}
+.login-tab{
+  flex:1;padding:9px;border-radius:10px;text-align:center;
+  font-size:.85rem;font-weight:600;cursor:pointer;
+  color:var(--muted);transition:all .2s;border:none;background:none;
+  font-family:var(--font-b);
+}
+.login-tab.active{background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--border)}
+
+.form-group{margin-bottom:16px}
+.form-label{
+  display:flex;align-items:center;gap:6px;
+  font-size:.74rem;font-weight:600;color:var(--muted);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:7px;
+}
+.input-wrap{position:relative}
+.input-icon{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  color:var(--muted);pointer-events:none;
+}
+.form-input{
+  width:100%;background:var(--navy);border:1px solid var(--border2);
+  border-radius:var(--r);padding:12px 14px 12px 42px;
+  font-family:var(--font-b);font-size:.92rem;color:var(--snow);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.form-input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,204,.1)}
+.form-input::placeholder{color:var(--muted2)}
+.form-input.no-icon{padding-left:14px}
+.show-pw{
+  position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  color:var(--muted);cursor:pointer;transition:color .2s;background:none;border:none;
+}
+.show-pw:hover{color:var(--cyan)}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.login-options{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;
+}
+.remember{display:flex;align-items:center;gap:8px;cursor:pointer}
+.check-box{
+  width:18px;height:18px;border-radius:5px;
+  border:1.5px solid var(--border2);background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;flex-shrink:0;
+}
+.check-box.checked{background:var(--cyan);border-color:var(--cyan);color:#000}
+.remember-label{font-size:.83rem;color:var(--muted)}
+.forgot-link{font-size:.83rem;color:var(--cyan);cursor:pointer;text-decoration:none}
+.forgot-link:hover{text-decoration:underline}
+
+.btn-login{
+  width:100%;padding:14px;border-radius:var(--r);
+  background:linear-gradient(135deg,var(--cyan),#00B5A0);
+  border:none;color:#000;cursor:pointer;
+  font-family:var(--font-b);font-size:.98rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  box-shadow:0 6px 28px rgba(0,229,204,.35);
+  transition:opacity .2s,transform .2s;margin-bottom:18px;
+}
+.btn-login:hover{opacity:.92;transform:translateY(-1px)}
+.btn-login:active{transform:translateY(0)}
+
+.login-divider{
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.divider-line{flex:1;height:1px;background:var(--border2)}
+.divider-text{font-size:.75rem;color:var(--muted2)}
+
+.social-logins{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:22px}
+.social-btn-login{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px;border-radius:var(--r);font-size:.83rem;font-weight:500;
+  cursor:pointer;border:1px solid var(--border2);background:var(--navy);
+  color:var(--text);font-family:var(--font-b);transition:border-color .2s,background .2s;
+}
+.social-btn-login:hover{border-color:var(--border);background:var(--surface)}
+
+.login-footer-note{text-align:center;font-size:.78rem;color:var(--muted2);line-height:1.6}
+.login-footer-note a{color:var(--cyan);cursor:pointer}
+
+/* Login right - visual panel */
+.login-right{
+  width:44%;background:var(--deep);
+  border-left:1px solid var(--border2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:48px;position:relative;overflow:hidden;
+}
+@media(max-width:900px){.login-right{display:none}.login-left{padding:32px 24px}}
+.login-right-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 30% 20%,rgba(0,229,204,.08) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 80%,rgba(34,197,94,.06) 0%,transparent 50%);
+}
+.health-visual{position:relative;z-index:1;width:100%;max-width:360px}
+.health-card-demo{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:22px;margin-bottom:14px;
+}
+.hcd-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.hcd-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.hcd-label{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.hcd-val{font-family:var(--font-d);font-size:1.6rem;color:var(--snow)}
+.hcd-bar-track{height:5px;background:var(--border2);border-radius:99px;overflow:hidden;margin-top:10px}
+.hcd-bar-fill{height:100%;border-radius:99px}
+.pulse-ring{
+  width:80px;height:80px;border-radius:50%;
+  background:rgba(0,229,204,.06);border:1.5px solid rgba(0,229,204,.2);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 16px;
+  animation:pulseRing 2s ease-in-out infinite;
+}
+@keyframes pulseRing{
+  0%,100%{box-shadow:0 0 0 0 rgba(0,229,204,.3)}
+  50%{box-shadow:0 0 0 20px rgba(0,229,204,0)}
+}
+.login-tagline{
+  font-family:var(--font-d);font-size:1.4rem;color:var(--snow);
+  text-align:center;line-height:1.3;margin-bottom:10px;
+}
+.login-tagline em{font-style:italic;color:var(--cyan)}
+.login-features{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.login-feat{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border-radius:var(--r);
+  background:rgba(255,255,255,.03);border:1px solid var(--border2);
+}
+.login-feat-icon{color:var(--cyan);flex-shrink:0}
+.login-feat-text{font-size:.83rem;color:var(--text)}
+
+/* ══════ APP LAYOUT ══════ */
+#appLayout{display:none;height:100vh}
+#appLayout.show{display:flex}
+
+/* SIDEBAR */
+.sidebar{
+  width:var(--sidebar-w);flex-shrink:0;
+  background:var(--deep);border-right:1px solid var(--border2);
+  display:flex;flex-direction:column;height:100vh;overflow:hidden;
+  position:relative;z-index:100;
+}
+.sidebar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+.sidebar-logo{padding:24px 20px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
+.logo-pulse{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,var(--cyan),#00B5A0);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 18px rgba(0,229,204,.35);
+  font-size:1.05rem;font-weight:700;color:#000;font-family:var(--font-d);
+}
+.logo-name{font-family:var(--font-d);font-size:.98rem;color:var(--snow)}
+.logo-sub{font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.sidebar-user{
+  margin:14px 12px;background:var(--navy);border:1px solid var(--border2);
+  border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:10px;
+}
+.user-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan-dim),var(--green-dim));
+  border:2px solid var(--cyan);display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-d);font-size:.95rem;color:var(--cyan);flex-shrink:0;
+}
+.user-name{font-size:.85rem;font-weight:600;color:var(--snow)}
+.user-status{font-size:.68rem;color:var(--green);display:flex;align-items:center;gap:5px;margin-top:2px}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px}
+.nav-group-label{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted2);padding:10px 12px 5px;margin-top:6px}
+.nav-item{
+  display:flex;align-items:center;gap:11px;padding:10px 13px;border-radius:var(--r);
+  cursor:pointer;transition:background .2s,color .2s;font-size:.86rem;color:var(--muted);
+  font-weight:500;position:relative;margin-bottom:2px;
+}
+.nav-item:hover{background:var(--navy);color:var(--text)}
+.nav-item.active{background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--border)}
+.nav-item.active::before{content:'';position:absolute;left:0;top:8px;bottom:8px;
+  width:3px;border-radius:99px;background:var(--cyan)}
+.nav-icon{width:17px;height:17px;flex-shrink:0}
+.nav-badge{
+  margin-left:auto;font-size:.62rem;font-weight:700;
+  padding:2px 7px;border-radius:99px;min-width:18px;text-align:center;
+}
+.nb-red{background:var(--red);color:#fff}
+.nb-green{background:var(--green);color:#000}
+.nb-amber{background:var(--amber);color:#000}
+.nb-cyan{background:var(--cyan);color:#000}
+.sidebar-footer{padding:12px;border-top:1px solid var(--border2)}
+.sidebar-footer-btn{
+  display:flex;align-items:center;gap:10px;padding:9px 13px;
+  border-radius:var(--r);cursor:pointer;font-size:.82rem;color:var(--muted);
+  transition:background .2s,color .2s;
+}
+.sidebar-footer-btn:hover{background:var(--navy);color:var(--red)}
+
+/* MAIN */
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+.topbar{
+  background:rgba(7,16,32,.9);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border2);padding:0 24px;height:62px;
+  display:flex;align-items:center;justify-content:space-between;flex-shrink:0;z-index:50;
+}
+.topbar-search{
+  display:flex;align-items:center;gap:9px;
+  background:var(--navy);border:1px solid var(--border2);
+  border-radius:var(--r);padding:8px 14px;width:220px;transition:border-color .2s,width .3s;
+}
+.topbar-search:focus-within{border-color:var(--border);width:260px}
+.topbar-search input{background:none;border:none;outline:none;
+  font-family:var(--font-b);font-size:.82rem;color:var(--snow);width:100%}
+.topbar-search input::placeholder{color:var(--muted2)}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.topbar-btn{
+  width:36px;height:36px;border-radius:var(--r);
+  background:var(--navy);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);transition:all .2s;position:relative;
+}
+.topbar-btn:hover{border-color:var(--border);color:var(--cyan)}
+.notif-dot{position:absolute;top:7px;right:7px;width:7px;height:7px;
+  border-radius:50%;background:var(--red);border:2px solid var(--deep)}
+.content-area{flex:1;overflow-y:auto;padding:24px;scroll-behavior:smooth}
+
+/* ══════ SECTIONS ══════ */
+.section-view{display:none;animation:fadeIn .3s ease}
+.section-view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══════ UTILITIES ══════ */
+.flex-between{display:flex;align-items:center;justify-content:space-between}
+.section-title{font-family:var(--font-d);font-size:1.45rem;color:var(--snow);margin-bottom:5px}
+.section-sub{font-size:.84rem;color:var(--muted);margin-bottom:20px}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.card-title{font-family:var(--font-d);font-size:.98rem;color:var(--snow)}
+.card-action{font-size:.73rem;color:var(--cyan);cursor:pointer;
+  padding:4px 11px;border-radius:99px;border:1px solid var(--border);background:var(--cyan-dim)}
+.card-action:hover{opacity:.8}
+.badge-green{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.badge-amber{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,179,71,.2)}
+.badge-red{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,92,122,.2)}
+.badge-blue{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(77,166,255,.2)}
+.badge-cyan{background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--border)}
+
+.btn-new{
+  display:flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--cyan),#00B5A0);color:#000;
+  font-family:var(--font-b);font-size:.83rem;font-weight:700;
+  padding:9px 20px;border:none;border-radius:var(--r);cursor:pointer;
+  box-shadow:0 4px 16px rgba(0,229,204,.3);transition:opacity .2s,transform .2s;
+}
+.btn-new:hover{opacity:.9;transform:translateY(-1px)}
+
+/* ══════ DASHBOARD ══════ */
+.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.metric-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);
+  padding:18px;cursor:pointer;transition:transform .25s,border-color .25s;position:relative;overflow:hidden;
+}
+.metric-card:hover{transform:translateY(-3px);border-color:var(--border);box-shadow:var(--glow)}
+.metric-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--c-acc,var(--cyan)),transparent);opacity:.7}
+.metric-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.metric-label{font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.metric-value{font-family:var(--font-d);font-size:1.9rem;color:var(--snow);line-height:1;margin-bottom:4px}
+.metric-unit{font-size:.72rem;color:var(--muted);font-family:var(--font-b);margin-left:3px}
+.metric-delta{font-size:.73rem;font-weight:600;display:flex;align-items:center;gap:4px;margin-top:6px}
+.delta-up{color:var(--green)}.delta-warn{color:var(--amber)}.delta-down{color:var(--red)}
+.mini-chart{margin-top:10px;height:32px}
+.mini-chart svg{width:100%;height:100%}
+
+.dash-mid{display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:14px;margin-bottom:18px}
+.dash-bot{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
+
+/* heart rate card */
+.hr-card,.donut-card,.activity-card,.appt-card,.meds-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:20px;
+}
+.hr-num{font-family:var(--font-d);font-size:2.4rem;color:var(--snow);line-height:1}
+.hr-badge{padding:4px 11px;border-radius:99px;font-size:.68rem;font-weight:700;
+  background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+.hr-wave{width:100%;height:52px;margin-top:10px}
+.ecg-path{stroke:var(--cyan);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;
+  animation:ecgDash 3s linear infinite}
+.ecg-area{fill:url(#ecgGrad);opacity:.15;animation:ecgDash 3s linear infinite}
+@keyframes ecgDash{0%{stroke-dashoffset:600}100%{stroke-dashoffset:0}}
+
+/* activity items */
+.activity-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.activity-item{
+  display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:var(--r);
+  background:var(--navy);border:1px solid var(--border2);transition:border-color .2s;cursor:pointer;
+}
+.activity-item:hover{border-color:var(--border)}
+.activity-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.activity-name{font-size:.84rem;color:var(--snow);font-weight:500}
+.activity-time{font-size:.7rem;color:var(--muted);margin-top:1px}
+.activity-val{margin-left:auto;font-size:.8rem;font-weight:700;color:var(--cyan)}
+
+/* appt */
+.appt-list{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.appt-item{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;
+  border-left:3px solid var(--cyan);background:rgba(255,255,255,.02);
+  border-radius:0 var(--r) var(--r) 0;transition:background .2s;cursor:pointer;
+}
+.appt-item:hover{background:rgba(255,255,255,.04)}
+.appt-time{font-family:var(--font-d);font-size:.98rem;color:var(--snow);white-space:nowrap;min-width:55px}
+.appt-dr{font-size:.85rem;color:var(--snow);font-weight:500}
+.appt-spec{font-size:.72rem;color:var(--muted);margin-top:1px}
+.appt-badge{margin-left:auto;font-size:.66rem;font-weight:700;text-transform:uppercase;
+  padding:3px 9px;border-radius:99px;white-space:nowrap}
+
+/* meds */
+.med-item{display:flex;align-items:center;gap:11px;padding:10px 12px;
+  background:var(--navy);border:1px solid var(--border2);border-radius:var(--r);
+  margin-bottom:7px;cursor:pointer;transition:border-color .2s}
+.med-item:hover{border-color:var(--border)}
+.med-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.med-name{font-size:.84rem;color:var(--snow);font-weight:500}
+.med-dose{font-size:.7rem;color:var(--muted);margin-top:1px}
+.med-check{margin-left:auto;width:22px;height:22px;border-radius:50%;
+  border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;flex-shrink:0}
+.med-check.done{background:var(--green);border-color:var(--green);color:#fff}
+.med-check:hover:not(.done){border-color:var(--cyan);color:var(--cyan)}
+
+/* alert bar */
+.alert-bar{
+  background:linear-gradient(135deg,rgba(255,92,122,.07),transparent);
+  border:1px solid rgba(255,92,122,.18);border-radius:var(--r);
+  padding:12px 16px;display:flex;align-items:center;gap:11px;margin-bottom:18px;
+}
+.alert-bar-text{font-size:.84rem;color:var(--text)}
+.alert-bar-text strong{color:var(--red)}
+
+/* ══════ RDV ══════ */
+.rdv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.rdv-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);
+  padding:20px;transition:transform .25s,border-color .25s;cursor:pointer;
+}
+.rdv-card:hover{transform:translateY(-3px);border-color:var(--border)}
+.rdv-card-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.dr-avatar{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-d);font-size:1rem;flex-shrink:0;border:2px solid}
+.rdv-dr-name{font-size:.95rem;font-weight:600;color:var(--snow)}
+.rdv-dr-spec{font-size:.73rem;color:var(--muted);margin-top:2px}
+.rdv-info-row{display:flex;align-items:center;gap:8px;font-size:.79rem;color:var(--muted);margin-bottom:7px}
+.rdv-footer{display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--border2);margin-top:12px}
+.rdv-btns{display:flex;gap:7px}
+.btn-sm{font-size:.73rem;font-weight:600;padding:6px 13px;border-radius:9px;
+  cursor:pointer;border:none;transition:opacity .2s;font-family:var(--font-b)}
+.btn-sm-cyan{background:var(--cyan);color:#000}
+.btn-sm-outline{background:transparent;border:1px solid var(--border2);color:var(--muted)}
+.btn-sm:hover{opacity:.85}
+
+/* mini calendar */
+.mini-cal{background:var(--navy);border:1px solid var(--border2);border-radius:var(--r-lg);padding:18px;margin-bottom:14px}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.cal-month{font-family:var(--font-d);font-size:.95rem;color:var(--snow)}
+.cal-nav{width:26px;height:26px;border-radius:7px;background:var(--card2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted);transition:color .2s}
+.cal-nav:hover{color:var(--cyan)}
+.cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:5px}
+.cal-day-name{text-align:center;font-size:.62rem;color:var(--muted2);text-transform:uppercase;padding:3px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;
+  font-size:.76rem;color:var(--muted);cursor:pointer;transition:all .18s}
+.cal-day:hover{background:var(--card2);color:var(--snow)}
+.cal-day.other{color:var(--muted2)}
+.cal-day.today{background:var(--cyan-dim);color:var(--cyan);font-weight:700;border:1px solid var(--border)}
+.cal-day.selected{background:var(--cyan);color:#000;font-weight:700}
+.cal-day.has-appt{position:relative}
+.cal-day.has-appt::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;border-radius:50%;background:var(--cyan)}
+
+/* ══════ DOSSIER ══════ */
+.dossier-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.record-section{background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:20px}
+.record-list{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+.record-item{display:flex;align-items:center;gap:12px;padding:11px 14px;
+  background:var(--navy);border:1px solid var(--border2);border-radius:var(--r);
+  cursor:pointer;transition:border-color .2s}
+.record-item:hover{border-color:var(--border)}
+.record-file-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.1rem}
+.record-name{font-size:.83rem;color:var(--snow);font-weight:500}
+.record-date{font-size:.7rem;color:var(--muted);margin-top:1px}
+.record-size{margin-left:auto;font-size:.7rem;color:var(--muted2)}
+.vitals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.vital-item{background:var(--navy);border:1px solid var(--border2);border-radius:var(--r);padding:14px;text-align:center}
+.vital-val{font-family:var(--font-d);font-size:1.4rem;color:var(--snow);margin-bottom:3px}
+.vital-lbl{font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.vital-status{font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:99px;margin-top:5px;display:inline-block}
+
+/* ══════ MÉDICAMENTS ══════ */
+.meds-full-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.med-full-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:18px;
+  transition:transform .25s,border-color .25s}
+.med-full-card:hover{transform:translateY(-3px);border-color:var(--border)}
+.med-full-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.med-pill-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.med-full-name{font-size:.95rem;font-weight:600;color:var(--snow)}
+.med-full-gen{font-size:.73rem;color:var(--muted);margin-top:1px}
+.med-prog-label{display:flex;justify-content:space-between;font-size:.7rem;color:var(--muted);margin-bottom:5px}
+.med-prog-track{height:4px;background:var(--border2);border-radius:99px;overflow:hidden}
+.med-prog-fill{height:100%;border-radius:99px}
+.med-schedule{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px}
+.med-slot{padding:7px 5px;border-radius:8px;text-align:center;font-size:.7rem;border:1px solid var(--border2)}
+.med-slot.taken{background:var(--green-dim);border-color:rgba(34,197,94,.2);color:var(--green)}
+.med-slot.pending{background:var(--cyan-dim);border-color:var(--border);color:var(--cyan)}
+.med-slot.missed{background:var(--red-dim);border-color:rgba(255,92,122,.2);color:var(--red)}
+.med-slot-time{font-weight:700;margin-bottom:2px}
+.med-slot-status{font-size:.62rem;opacity:.85}
+
+/* ══════ ACTIVITÉ ══════ */
+.activity-section-grid{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}
+.activity-big-card,.steps-radial{background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:20px}
+.week-bars{display:flex;align-items:flex-end;gap:7px;height:110px;margin-top:14px}
+.week-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.week-bar{width:100%;border-radius:5px 5px 0 0;min-height:4px;cursor:pointer}
+.week-bar:hover{filter:brightness(1.2)}
+.week-day{font-size:.65rem;color:var(--muted);text-transform:uppercase}
+
+/* ══════ CONSEILS ══════ */
+.conseils-hero{
+  background:linear-gradient(135deg,rgba(0,229,204,.07),rgba(34,197,94,.04));
+  border:1px solid var(--border);border-radius:var(--r-xl);
+  padding:32px 36px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.conseils-hero-title{font-family:var(--font-d);font-size:1.8rem;color:var(--snow);margin-bottom:8px}
+.conseils-hero-title em{color:var(--cyan);font-style:italic}
+.conseils-hero-sub{font-size:.9rem;color:var(--muted);line-height:1.6;max-width:440px}
+.conseils-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.conseil-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);
+  padding:20px;cursor:pointer;transition:transform .25s,border-color .25s}
+.conseil-card:hover{transform:translateY(-4px);border-color:var(--border)}
+.conseil-tag{display:inline-flex;align-items:center;gap:5px;font-size:.66rem;font-weight:700;
+  letter-spacing:.07em;text-transform:uppercase;padding:3px 11px;border-radius:99px;margin-bottom:12px}
+.conseil-title{font-family:var(--font-d);font-size:1.1rem;color:var(--snow);margin-bottom:7px;line-height:1.3}
+.conseil-excerpt{font-size:.8rem;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.conseil-footer{display:flex;align-items:center;justify-content:space-between;
+  padding-top:10px;border-top:1px solid var(--border2)}
+.conseil-author{font-size:.72rem;color:var(--muted)}
+.conseil-read{font-size:.72rem;color:var(--cyan);font-weight:600}
+
+/* ══════ PHARMACIES ══════ */
+.pharm-hero{
+  background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(0,229,204,.05));
+  border:1px solid rgba(34,197,94,.18);border-radius:var(--r-xl);
+  padding:30px 34px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.pharm-hero-title{font-family:var(--font-d);font-size:1.7rem;color:var(--snow);margin-bottom:7px}
+.pharm-hero-title em{color:var(--green);font-style:italic}
+.pharm-hero-sub{font-size:.88rem;color:var(--muted);line-height:1.6;max-width:420px}
+.pharm-hero-icon{
+  width:80px;height:80px;border-radius:22px;
+  background:var(--green-dim);border:1px solid rgba(34,197,94,.2);
+  display:flex;align-items:center;justify-content:center;font-size:2.6rem;flex-shrink:0;
+}
+/* live clock */
+.pharm-clock{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);
+  padding:18px 24px;margin-bottom:18px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+}
+.pharm-clock-time{font-family:var(--font-d);font-size:2.6rem;color:var(--cyan);line-height:1}
+.pharm-clock-date{font-size:.8rem;color:var(--muted);margin-top:3px}
+.pharm-clock-badge{
+  padding:8px 20px;border-radius:99px;font-size:.8rem;font-weight:700;
+  background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.25);
+  display:flex;align-items:center;gap:7px;
+}
+.pharm-clock-badge.fermee{background:var(--red-dim);color:var(--red);border-color:rgba(255,92,122,.25)}
+.pharm-clock-badge.garde{background:var(--amber-dim);color:var(--amber);border-color:rgba(255,179,71,.25)}
+.clock-live-dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:blink 1.2s infinite}
+
+/* filter + search bar */
+.pharm-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.pharm-search{
+  display:flex;align-items:center;gap:8px;flex:1;min-width:200px;
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r);padding:9px 14px;
+  transition:border-color .2s;
+}
+.pharm-search:focus-within{border-color:var(--border)}
+.pharm-search input{background:none;border:none;outline:none;font-family:var(--font-b);font-size:.85rem;color:var(--snow);width:100%}
+.pharm-search input::placeholder{color:var(--muted2)}
+.pharm-filter-tabs{display:flex;gap:4px;background:var(--card);border-radius:var(--r);padding:4px;border:1px solid var(--border2)}
+.pharm-tab{padding:7px 16px;border-radius:10px;font-size:.78rem;font-weight:600;
+  cursor:pointer;color:var(--muted);transition:all .2s;border:none;background:none;font-family:var(--font-b)}
+.pharm-tab.active{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2)}
+
+/* pharmacy grid */
+.pharm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.pharm-card{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);
+  overflow:hidden;transition:transform .25s,border-color .25s;cursor:pointer;
+}
+.pharm-card:hover{transform:translateY(-4px);border-color:rgba(34,197,94,.25)}
+.pharm-card-top{
+  padding:16px 18px;border-bottom:1px solid var(--border2);
+  display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+}
+.pharm-avatar{
+  width:46px;height:46px;border-radius:13px;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  flex-shrink:0;background:rgba(0,0,0,.3);
+}
+.pharm-name{font-size:.95rem;font-weight:700;color:var(--snow);margin-bottom:3px}
+.pharm-ville{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:5px}
+.pharm-status-badge{
+  padding:5px 12px;border-radius:99px;font-size:.7rem;font-weight:700;
+  white-space:nowrap;display:flex;align-items:center;gap:5px;
+}
+.status-open{background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.25)}
+.status-closed{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,92,122,.25)}
+.status-garde{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,179,71,.25)}
+.pharm-card-body{padding:14px 18px}
+.pharm-schedule-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.pharm-schedule-item{background:var(--navy);border:1px solid var(--border2);border-radius:10px;padding:9px 11px}
+.pharm-sched-day{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.pharm-sched-hours{font-size:.78rem;font-weight:600;color:var(--snow)}
+.pharm-sched-hours.closed-txt{color:var(--red);opacity:.7}
+.pharm-info-row{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+.pharm-card-footer{
+  padding:11px 18px;border-top:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.pharm-services{display:flex;gap:5px;flex-wrap:wrap}
+.pharm-service-tag{
+  font-size:.63rem;font-weight:600;padding:3px 9px;border-radius:99px;
+  background:rgba(0,229,204,.07);color:var(--cyan);border:1px solid rgba(0,229,204,.15);
+}
+.btn-pharm{
+  font-size:.73rem;font-weight:700;padding:6px 13px;border-radius:9px;
+  background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2);
+  cursor:pointer;font-family:var(--font-b);transition:opacity .2s;
+}
+.btn-pharm:hover{opacity:.8}
+/* garde banner */
+.garde-banner{
+  background:linear-gradient(135deg,rgba(255,179,71,.08),transparent);
+  border:1px solid rgba(255,179,71,.2);border-radius:var(--r-lg);
+  padding:16px 20px;margin-bottom:18px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.garde-banner-icon{font-size:1.6rem;flex-shrink:0}
+.garde-banner-title{font-size:.92rem;font-weight:700;color:var(--amber);margin-bottom:3px}
+.garde-banner-sub{font-size:.8rem;color:var(--muted)}
+/* summary stats */
+.pharm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.pharm-stat{
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--r);
+  padding:14px 16px;text-align:center;
+}
+.pharm-stat-num{font-family:var(--font-d);font-size:1.8rem;color:var(--snow)}
+.pharm-stat-lbl{font-size:.72rem;color:var(--muted);margin-top:3px}
+
+/* ══════ PROFIL ══════ */
+.profil-header{
+  background:linear-gradient(135deg,var(--navy),var(--surface));
+  border:1px solid var(--border2);border-radius:var(--r-xl);
+  padding:28px;margin-bottom:20px;display:flex;align-items:center;gap:22px;
+}
+.profil-avatar-big{
+  width:84px;height:84px;border-radius:50%;
+  background:linear-gradient(135deg,var(--cyan-dim),var(--green-dim));
+  border:3px solid var(--cyan);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-d);font-size:2rem;color:var(--cyan);
+  flex-shrink:0;position:relative;
+}
+.profil-online{position:absolute;bottom:4px;right:4px;width:14px;height:14px;
+  border-radius:50%;background:var(--green);border:3px solid var(--void)}
+.profil-name{font-family:var(--font-d);font-size:1.5rem;color:var(--snow);margin-bottom:3px}
+.profil-id{font-size:.75rem;color:var(--muted)}
+.profil-tags{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.profil-tag{padding:4px 12px;border-radius:99px;font-size:.7rem;font-weight:600;
+  background:var(--cyan-dim);color:var(--cyan);border:1px solid var(--border)}
+.profil-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.profil-section{background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:20px}
+.profil-field{padding:12px 0;border-bottom:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between}
+.profil-field:last-child{border-bottom:none}
+.profil-field-label{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.profil-field-value{font-size:.88rem;color:var(--snow);font-weight:500}
+
+/* ══════ MODAL ══════ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;background:rgba(2,5,9,.82);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:var(--navy);border:1px solid var(--border);border-radius:var(--r-xl);
+  padding:28px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;
+  transform:scale(.95) translateY(16px);transition:transform .25s;
+}
+.modal-overlay.open .modal{transform:scale(1) translateY(0)}
+.modal-title{font-family:var(--font-d);font-size:1.35rem;color:var(--snow);margin-bottom:5px}
+.modal-sub{font-size:.82rem;color:var(--muted);margin-bottom:20px}
+.form-group{margin-bottom:14px}
+.form-label{font-size:.73rem;font-weight:600;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:6px;display:block}
+.form-input-modal{
+  width:100%;background:var(--deep);border:1px solid var(--border2);border-radius:var(--r);
+  padding:10px 13px;font-family:var(--font-b);font-size:.88rem;color:var(--snow);outline:none;transition:border-color .2s;
+}
+.form-input-modal:focus{border-color:var(--cyan)}
+.form-input-modal::placeholder{color:var(--muted2)}
+.form-row-modal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal-footer{display:flex;gap:9px;margin-top:20px}
+.btn-cancel{flex:1;padding:11px;border-radius:var(--r);background:transparent;
+  border:1px solid var(--border2);color:var(--muted);cursor:pointer;font-family:var(--font-b);font-size:.88rem}
+.btn-confirm{flex:2;padding:11px;border-radius:var(--r);
+  background:linear-gradient(135deg,var(--cyan),#00B5A0);border:none;color:#000;cursor:pointer;
+  font-family:var(--font-b);font-size:.88rem;font-weight:700;transition:opacity .2s}
+.btn-confirm:hover{opacity:.9}
+
+/* ══════ TOAST ══════ */
+.toast-wrap{position:fixed;bottom:22px;right:22px;z-index:2000;display:flex;flex-direction:column;gap:7px}
+.toast{
+  background:var(--card2);border:1px solid var(--border);border-radius:var(--r);
+  padding:12px 16px;display:flex;align-items:center;gap:11px;
+  box-shadow:var(--shadow-lg);min-width:250px;animation:slideToast .3s ease;
+}
+@keyframes slideToast{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}
+.toast-icon{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.toast-title{font-size:.85rem;font-weight:600;color:var(--snow)}
+.toast-msg{font-size:.74rem;color:var(--muted);margin-top:1px}
+
+/* ══════ RESPONSIVE ══════ */
+@media(max-width:1100px){
+  .dash-grid{grid-template-columns:repeat(2,1fr)}
+  .dash-mid{grid-template-columns:1fr 1fr}
+  .dash-bot{grid-template-columns:1fr}
+  .dossier-grid{grid-template-columns:1fr}
+  .meds-full-grid{grid-template-columns:1fr 1fr}
+  .activity-section-grid{grid-template-columns:1fr}
+  .pharm-stats{grid-template-columns:repeat(2,1fr)}
+  .profil-grid{grid-template-columns:1fr}
+}
+@media(max-width:850px){
+  :root{--sidebar-w:68px}
+  .logo-text,.sidebar-user .user-name,.sidebar-user .user-status,.nav-item span,.nav-badge,.nav-group-label,.sidebar-footer-btn span{display:none!important}
+  .sidebar-user{justify-content:center;padding:10px}
+  .sidebar-logo{padding:14px;justify-content:center}
+  .nav-item{justify-content:center;padding:11px}
+  .sidebar-footer-btn{justify-content:center}
+  .conseils-hero,.pharm-hero{flex-direction:column}
+  .profil-header{flex-direction:column;text-align:center}
+  .profil-tags{justify-content:center}
+}
+@media(max-width:600px){
+  .dash-grid{grid-template-columns:1fr}
+  .dash-mid{grid-template-columns:1fr}
+  .meds-full-grid{grid-template-columns:1fr}
+  .pharm-grid{grid-template-columns:1fr}
+  .pharm-stats{grid-template-columns:1fr 1fr}
+}
+
+</style>
+</head>
+<body>
+<!-- ══════════════════════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════════════════════ -->
+<div id="loginPage">
+
+  <!-- LEFT: Form -->
+  <div class="login-left">
+    <div class="login-grid"></div>
+
+    <div class="login-logo-wrap">
+      <div class="login-logo-icon">JH</div>
+      <div>
+        <div class="login-logo-name">JAYSON HEALTH</div>
+        <div class="login-logo-sub">Votre santé, notre priorité</div>
+      </div>
+    </div>
+
+    <div class="login-form-wrap">
+
+      <!-- Tabs -->
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchTab('connexion',this)">Connexion</button>
+        <button class="login-tab" onclick="switchTab('inscription',this)">Créer un compte</button>
+      </div>
+
+      <!-- CONNEXION FORM -->
+      <div id="tab-connexion">
+        <h1 class="login-title">Bon retour,<br><em>Jean 👋</em></h1>
+        <p class="login-sub">Connectez-vous pour accéder à votre espace santé personnel</p>
+
+        <div class="form-group">
+          <label class="form-label">
+            <i data-lucide="mail" style="width:13px;height:13px"></i> Adresse e-mail
+          </label>
+          <div class="input-wrap">
+            <i data-lucide="mail" style="width:16px;height:16px" class="input-icon"></i>
+            <input type="email" class="form-input" id="loginEmail" placeholder="votre@email.com" value="jean.dupont@email.com"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">
+            <i data-lucide="lock" style="width:13px;height:13px"></i> Mot de passe
+          </label>
+          <div class="input-wrap">
+            <i data-lucide="lock" style="width:16px;height:16px" class="input-icon"></i>
+            <input type="password" class="form-input" id="loginPw" placeholder="••••••••" value="password"/>
+            <button class="show-pw" onclick="togglePw('loginPw',this)">
+              <i data-lucide="eye" style="width:16px;height:16px"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="login-options">
+          <label class="remember">
+            <div class="check-box checked" id="rememberBox" onclick="this.classList.toggle('checked')">
+              <i data-lucide="check" style="width:11px;height:11px"></i>
+            </div>
+            <span class="remember-label">Se souvenir de moi</span>
+          </label>
+          <a class="forgot-link" onclick="showToast('Réinitialisation','Un e-mail vous a été envoyé','var(--cyan)','mail')">Mot de passe oublié ?</a>
+        </div>
+
+        <button class="btn-login" onclick="doLogin()">
+          <i data-lucide="log-in" style="width:18px;height:18px"></i>
+          Se connecter
+        </button>
+
+        <div class="login-divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">ou continuer avec</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="social-logins">
+          <button class="social-btn-login" onclick="doLogin()">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+            Google
+          </button>
+          <button class="social-btn-login" onclick="doLogin()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--text)"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </button>
+        </div>
+
+        <div class="login-footer-note">
+          Pas encore de compte ? <a onclick="switchTab('inscription',document.querySelectorAll('.login-tab')[1])">Créer un compte gratuit</a>
+        </div>
+      </div>
+
+      <!-- INSCRIPTION FORM -->
+      <div id="tab-inscription" style="display:none">
+        <h1 class="login-title">Créez votre<br><em>espace santé</em></h1>
+        <p class="login-sub">Rejoignez JAYSON HEALTH pour un suivi médical personnalisé</p>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <div class="input-wrap">
+              <i data-lucide="user" style="width:16px;height:16px" class="input-icon"></i>
+              <input type="text" class="form-input" placeholder="Jean"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <div class="input-wrap">
+              <i data-lucide="user" style="width:16px;height:16px" class="input-icon"></i>
+              <input type="text" class="form-input" placeholder="Dupont"/>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Adresse e-mail</label>
+          <div class="input-wrap">
+            <i data-lucide="mail" style="width:16px;height:16px" class="input-icon"></i>
+            <input type="email" class="form-input" placeholder="votre@email.com"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Téléphone</label>
+          <div class="input-wrap">
+            <i data-lucide="phone" style="width:16px;height:16px" class="input-icon"></i>
+            <input type="tel" class="form-input" placeholder="+237 6XX XXX XXX"/>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label">Mot de passe</label>
+            <div class="input-wrap">
+              <i data-lucide="lock" style="width:16px;height:16px" class="input-icon"></i>
+              <input type="password" class="form-input" placeholder="••••••••"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirmer</label>
+            <div class="input-wrap">
+              <i data-lucide="lock" style="width:16px;height:16px" class="input-icon"></i>
+              <input type="password" class="form-input" placeholder="••••••••"/>
+            </div>
+          </div>
+        </div>
+        <button class="btn-login" onclick="doLogin()">
+          <i data-lucide="user-plus" style="width:18px;height:18px"></i>
+          Créer mon compte
+        </button>
+        <div class="login-footer-note">
+          Déjà inscrit ? <a onclick="switchTab('connexion',document.querySelectorAll('.login-tab')[0])">Se connecter</a>
+          <br/><br/>
+          En créant un compte, vous acceptez nos <a>Conditions d'utilisation</a> et notre <a>Politique de confidentialité</a>.
+        </div>
+      </div>
+
+    </div>
+  </div><!-- end login-left -->
+
+  <!-- RIGHT: Visual panel -->
+  <div class="login-right">
+    <div class="login-right-bg"></div>
+    <div class="health-visual">
+      <div class="pulse-ring">
+        <i data-lucide="heart-pulse" style="width:36px;height:36px;color:var(--cyan)"></i>
+      </div>
+      <div class="login-tagline">Votre santé,<br><em>sous contrôle</em></div>
+      <p style="font-size:.83rem;color:var(--muted);text-align:center;margin-top:6px;margin-bottom:20px;line-height:1.6">
+        Une plateforme médicale complète pour les patients camerounais
+      </p>
+
+      <!-- Demo cards -->
+      <div class="health-card-demo">
+        <div class="hcd-top">
+          <div class="hcd-icon" style="background:var(--red-dim)">❤️</div>
+          <div>
+            <div class="hcd-label">Fréquence Cardiaque</div>
+            <div class="hcd-val" style="color:var(--red)">74 <small style="font-size:.8rem;color:var(--muted)">bpm</small></div>
+          </div>
+          <span style="margin-left:auto;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--green-dim);color:var(--green);border:1px solid rgba(34,197,94,.2)">Normal</span>
+        </div>
+        <div class="hcd-bar-track">
+          <div class="hcd-bar-fill" style="width:65%;background:linear-gradient(90deg,var(--red),rgba(255,92,122,.4))"></div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div class="health-card-demo" style="padding:16px">
+          <div class="hcd-label">Glycémie</div>
+          <div class="hcd-val" style="font-size:1.3rem;color:var(--cyan)">5.4 <small style="font-size:.7rem;color:var(--muted)">mmol/L</small></div>
+        </div>
+        <div class="health-card-demo" style="padding:16px">
+          <div class="hcd-label">Pas / jour</div>
+          <div class="hcd-val" style="font-size:1.3rem;color:var(--green)">7 832 <small style="font-size:.7rem;color:var(--muted)">pas</small></div>
+        </div>
+      </div>
+
+      <div class="login-features">
+        <div class="login-feat">
+          <i data-lucide="shield-check" style="width:18px;height:18px" class="login-feat-icon"></i>
+          <span class="login-feat-text">Dossier médical sécurisé & chiffré</span>
+        </div>
+        <div class="login-feat">
+          <i data-lucide="bell" style="width:18px;height:18px" class="login-feat-icon"></i>
+          <span class="login-feat-text">Rappels médicaments & rendez-vous</span>
+        </div>
+        <div class="login-feat">
+          <i data-lucide="map-pin" style="width:18px;height:18px" class="login-feat-icon"></i>
+          <span class="login-feat-text">Pharmacies de garde au Cameroun</span>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:22px;font-size:.72rem;color:var(--muted2)">
+        Conçu &amp; développé par <span style="color:var(--cyan);font-family:var(--font-d);font-style:italic">SOUMELONG JORDAN</span>
+      </p>
+    </div>
+  </div><!-- end login-right -->
+
+</div><!-- end loginPage -->
+
+
+<!-- ══════════════════════════════════════════════════════
+     APP LAYOUT
+══════════════════════════════════════════════════════ -->
+<div id="appLayout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-pulse">JH</div>
+    <div>
+      <div class="logo-name">JAYSON HEALTH</div>
+      <div class="logo-sub">Votre santé, notre priorité</div>
+    </div>
+  </div>
+  <div class="sidebar-user">
+    <div class="user-avatar">JD</div>
+    <div>
+      <div class="user-name">Jean Dupont</div>
+      <div class="user-status"><span class="status-dot"></span>En bonne santé</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Principal</div>
+    <div class="nav-item active" onclick="showView('dashboard',this)">
+      <i data-lucide="layout-dashboard" class="nav-icon"></i><span>Tableau de bord</span>
+    </div>
+    <div class="nav-item" onclick="showView('rendezvous',this)">
+      <i data-lucide="calendar-clock" class="nav-icon"></i><span>Rendez-vous</span>
+      <span class="nav-badge nb-red">2</span>
+    </div>
+    <div class="nav-item" onclick="showView('dossier',this)">
+      <i data-lucide="folder-heart" class="nav-icon"></i><span>Dossier Médical</span>
+    </div>
+    <div class="nav-item" onclick="showView('medicaments',this)">
+      <i data-lucide="pill" class="nav-icon"></i><span>Médicaments</span>
+      <span class="nav-badge nb-amber">1</span>
+    </div>
+    <div class="nav-group-label">Bien-être</div>
+    <div class="nav-item" onclick="showView('activite',this)">
+      <i data-lucide="activity" class="nav-icon"></i><span>Activité Physique</span>
+    </div>
+    <div class="nav-item" onclick="showView('conseils',this)">
+      <i data-lucide="book-heart" class="nav-icon"></i><span>Conseils Santé</span>
+      <span class="nav-badge nb-green">5</span>
+    </div>
+    <div class="nav-group-label">Services</div>
+    <div class="nav-item" onclick="showView('pharmacies',this)">
+      <i data-lucide="store" class="nav-icon"></i><span>Pharmacies 🇨🇲</span>
+      <span class="nav-badge nb-cyan">18</span>
+    </div>
+    <div class="nav-group-label">Compte</div>
+    <div class="nav-item" onclick="showView('profil',this)">
+      <i data-lucide="user-circle" class="nav-icon"></i><span>Mon Profil</span>
+    </div>
+    <div class="nav-item" onclick="showView('parametres',this)">
+      <i data-lucide="settings-2" class="nav-icon"></i><span>Paramètres</span>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-footer-btn" onclick="doLogout()">
+      <i data-lucide="log-out" style="width:15px;height:15px"></i>
+      <span>Déconnexion</span>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-search">
+      <i data-lucide="search" style="width:14px;height:14px;color:var(--muted);flex-shrink:0"></i>
+      <input type="text" placeholder="Rechercher..."/>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-btn" onclick="showToast('Rappel','Amoxicilline 500mg dans 30 min','var(--amber)','bell')">
+        <i data-lucide="bell" style="width:16px;height:16px"></i>
+        <div class="notif-dot"></div>
+      </div>
+      <div class="topbar-btn" onclick="openModal('rdvModal')">
+        <i data-lucide="plus" style="width:16px;height:16px"></i>
+      </div>
+      <div class="topbar-btn" onclick="showView('profil',null)">
+        <i data-lucide="user" style="width:16px;height:16px"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-area">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="section-view active" id="view-dashboard">
+      <div class="flex-between" style="margin-bottom:18px">
+        <div>
+          <h1 class="section-title">Bonjour, Jean 👋</h1>
+          <p class="section-sub" id="dashDate">Chargement...</p>
+        </div>
+        <button class="btn-new" onclick="openModal('rdvModal')">
+          <i data-lucide="plus" style="width:14px;height:14px"></i>Nouveau RDV
+        </button>
+      </div>
+      <div class="alert-bar" id="alertBar">
+        <i data-lucide="alert-triangle" style="width:17px;height:17px;color:var(--red);flex-shrink:0"></i>
+        <div class="alert-bar-text"><strong>Rappel :</strong> Prise de tension prévue à 18h00. N'oubliez pas de la noter dans votre dossier.</div>
+        <i data-lucide="x" style="width:15px;height:15px;margin-left:auto;cursor:pointer;color:var(--muted);flex-shrink:0" onclick="this.parentElement.style.display='none'"></i>
+      </div>
+      <div class="dash-grid" id="metricCards"></div>
+      <div class="dash-mid">
+        <!-- Heart rate -->
+        <div class="hr-card">
+          <div class="flex-between" style="margin-bottom:12px">
+            <div>
+              <div class="card-title">Fréquence Cardiaque</div>
+              <div style="font-size:.73rem;color:var(--muted)">Temps réel</div>
+            </div>
+            <span class="hr-badge">Normal</span>
+          </div>
+          <div>
+            <div class="hr-num">74<span style="font-family:var(--font-b);font-size:.85rem;color:var(--muted);margin-left:4px">bpm</span></div>
+            <div style="font-size:.72rem;color:var(--muted);margin-top:3px">Cible : 60–100 bpm</div>
+          </div>
+          <svg class="hr-wave" viewBox="0 0 300 52" preserveAspectRatio="none">
+            <defs><linearGradient id="ecgGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="var(--cyan)" stop-opacity=".35"/>
+              <stop offset="100%" stop-color="var(--cyan)" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path class="ecg-area" d="M0,38 L20,38 L30,38 L35,10 L40,46 L45,38 L80,38 L90,38 L95,8 L100,46 L105,38 L140,38 L150,38 L155,6 L160,48 L165,38 L200,38 L210,38 L215,10 L220,46 L225,38 L260,38 L270,38 L275,9 L280,46 L285,38 L300,38 L300,52 L0,52 Z"/>
+            <path class="ecg-path" stroke-dasharray="600" d="M0,38 L20,38 L30,38 L35,10 L40,46 L45,38 L80,38 L90,38 L95,8 L100,46 L105,38 L140,38 L150,38 L155,6 L160,48 L165,38 L200,38 L210,38 L215,10 L220,46 L225,38 L260,38 L270,38 L275,9 L280,46 L285,38 L300,38"/>
+          </svg>
+        </div>
+        <!-- Hydration -->
+        <div class="donut-card">
+          <div class="card-hdr"><div class="card-title">Hydratation</div></div>
+          <div style="font-size:.73rem;color:var(--muted);margin-bottom:4px">1.6 L / 2.5 L objectif</div>
+          <div style="position:relative;width:110px;height:110px;margin:12px auto 10px">
+            <svg viewBox="0 0 110 110" width="110" height="110">
+              <circle cx="55" cy="55" r="44" fill="none" stroke="var(--border2)" stroke-width="11"/>
+              <circle cx="55" cy="55" r="44" fill="none" stroke="var(--blue)" stroke-width="11"
+                stroke-dasharray="276.5" stroke-dashoffset="99.5" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font-family:var(--font-d);font-size:1.4rem;color:var(--blue)">64%</div>
+              <div style="font-size:.65rem;color:var(--muted)">1.6L</div>
+            </div>
+          </div>
+          <button onclick="showToast('Hydratation','+250ml enregistré','var(--blue)','droplets')" style="width:100%;background:var(--blue-dim);border:1px solid rgba(77,166,255,.2);color:var(--blue);border-radius:var(--r);padding:8px;cursor:pointer;font-family:var(--font-b);font-size:.78rem;font-weight:600">+ 250 ml</button>
+        </div>
+        <!-- Activity -->
+        <div class="activity-card">
+          <div class="card-hdr"><div class="card-title">Activité du jour</div><span class="card-action" onclick="showView('activite',null)">Tout voir</span></div>
+          <div class="activity-list">
+            <div class="activity-item"><div class="activity-dot" style="background:var(--cyan)"></div><div><div class="activity-name">Marche matinale</div><div class="activity-time">07:00 – 07:45</div></div><div class="activity-val">3.2 km</div></div>
+            <div class="activity-item"><div class="activity-dot" style="background:var(--green)"></div><div><div class="activity-name">Yoga & étirements</div><div class="activity-time">09:30 – 10:00</div></div><div class="activity-val">30 min</div></div>
+            <div class="activity-item"><div class="activity-dot" style="background:var(--amber)"></div><div><div class="activity-name">Vélo stationnaire</div><div class="activity-time">17:00 – 17:35</div></div><div class="activity-val">280 kcal</div></div>
+            <div class="activity-item"><div class="activity-dot" style="background:var(--muted2)"></div><div><div class="activity-name">Course à pied</div><div class="activity-time">Planifié — 19h00</div></div><div class="activity-val" style="color:var(--muted)">À venir</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-bot">
+        <div class="appt-card">
+          <div class="card-hdr"><div><div class="card-title">RDV du jour</div><div style="font-size:.72rem;color:var(--muted);margin-top:2px">Lundi 9 Mars 2025</div></div><span class="card-action" onclick="showView('rendezvous',null)">Gérer</span></div>
+          <div class="appt-list">
+            <div class="appt-item"><div class="appt-time">09:30</div><div><div class="appt-dr">Dr. Aminatou Bello</div><div class="appt-spec">Médecin généraliste — Yaoundé</div></div><span class="appt-badge badge-green" style="font-size:.64rem;padding:3px 8px;border-radius:99px">Confirmé</span></div>
+            <div class="appt-item" style="border-left-color:var(--amber)"><div class="appt-time">14:00</div><div><div class="appt-dr">Dr. Paul Mvondo</div><div class="appt-spec">Cardiologue — Clinique de l'Espoir</div></div><span class="appt-badge badge-amber" style="font-size:.64rem;padding:3px 8px;border-radius:99px">En attente</span></div>
+          </div>
+        </div>
+        <div class="meds-card">
+          <div class="card-hdr"><div><div class="card-title">Médicaments du jour</div><div style="font-size:.72rem;color:var(--muted);margin-top:2px">2/3 pris</div></div><span class="card-action" onclick="showView('medicaments',null)">Voir</span></div>
+          <div style="margin-top:12px">
+            <div class="med-item"><div class="med-icon" style="background:rgba(0,229,204,.1)">💊</div><div><div class="med-name">Amoxicilline</div><div class="med-dose">500mg — Matin ✓</div></div><div class="med-check done" onclick="toggleMed(this)"><i data-lucide="check" style="width:11px;height:11px"></i></div></div>
+            <div class="med-item"><div class="med-icon" style="background:rgba(255,179,71,.1)">🔶</div><div><div class="med-name">Metformine</div><div class="med-dose">850mg — Midi ✓</div></div><div class="med-check done" onclick="toggleMed(this)"><i data-lucide="check" style="width:11px;height:11px"></i></div></div>
+            <div class="med-item"><div class="med-icon" style="background:rgba(255,92,122,.1)">❤️</div><div><div class="med-name">Lisinopril</div><div class="med-dose">10mg — Soir ⏳</div></div><div class="med-check" onclick="toggleMed(this)"><i data-lucide="check" style="width:11px;height:11px"></i></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── RENDEZ-VOUS ── -->
+    <div class="section-view" id="view-rendezvous">
+      <h1 class="section-title">Rendez-vous Médicaux</h1>
+      <p class="section-sub">Gérez vos consultations et suivis</p>
+      <div style="display:grid;grid-template-columns:1fr 270px;gap:16px;align-items:start">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+            <div style="display:flex;gap:4px;background:var(--navy);border-radius:var(--r);padding:4px;border:1px solid var(--border2)">
+              <button class="rdv-tab active" onclick="filterRdv('tous',this)">Tous</button>
+              <button class="rdv-tab" onclick="filterRdv('confirmé',this)">Confirmés</button>
+              <button class="rdv-tab" onclick="filterRdv('en attente',this)">En attente</button>
+              <button class="rdv-tab" onclick="filterRdv('passé',this)">Passés</button>
+            </div>
+            <button class="btn-new" onclick="openModal('rdvModal')">
+              <i data-lucide="plus" style="width:14px;height:14px"></i>Prendre RDV
+            </button>
+          </div>
+          <div class="rdv-grid" id="rdvGrid"></div>
+        </div>
+        <div>
+          <div class="mini-cal">
+            <div class="cal-header">
+              <button class="cal-nav" onclick="prevMonth()"><i data-lucide="chevron-left" style="width:13px;height:13px"></i></button>
+              <div class="cal-month" id="calMonth"></div>
+              <button class="cal-nav" onclick="nextMonth()"><i data-lucide="chevron-right" style="width:13px;height:13px"></i></button>
+            </div>
+            <div class="cal-days-header">
+              <div class="cal-day-name">Lun</div><div class="cal-day-name">Mar</div><div class="cal-day-name">Mer</div>
+              <div class="cal-day-name">Jeu</div><div class="cal-day-name">Ven</div><div class="cal-day-name">Sam</div><div class="cal-day-name">Dim</div>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:14px">
+            <div class="card-title" style="font-size:.88rem;margin-bottom:10px">Prochains RDV</div>
+            <div id="nextAppts"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DOSSIER ── -->
+    <div class="section-view" id="view-dossier">
+      <div class="flex-between" style="margin-bottom:18px">
+        <div><h1 class="section-title">Dossier Médical</h1><p class="section-sub">Analyses, ordonnances et antécédents</p></div>
+        <button class="btn-new" onclick="showToast('Ajout','Sélectionnez un fichier à importer','var(--blue)','upload')">
+          <i data-lucide="upload" style="width:14px;height:14px"></i>Ajouter
+        </button>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:20px;margin-bottom:16px">
+        <div class="card-hdr"><div class="card-title">Constantes vitales récentes</div><span class="card-action">Mettre à jour</span></div>
+        <div class="vitals-grid">
+          <div class="vital-item"><div class="vital-val">120<span style="font-size:.85rem">/80</span></div><div class="vital-lbl">Tension (mmHg)</div><div class="vital-status badge-green">Normal</div></div>
+          <div class="vital-item"><div class="vital-val">74</div><div class="vital-lbl">Pouls (bpm)</div><div class="vital-status badge-green">Normal</div></div>
+          <div class="vital-item"><div class="vital-val">36.7</div><div class="vital-lbl">Température (°C)</div><div class="vital-status badge-green">Normal</div></div>
+          <div class="vital-item"><div class="vital-val">98%</div><div class="vital-lbl">SpO2</div><div class="vital-status badge-green">Excellent</div></div>
+          <div class="vital-item"><div class="vital-val">78</div><div class="vital-lbl">Poids (kg)</div><div class="vital-status badge-amber">Surveiller</div></div>
+          <div class="vital-item"><div class="vital-val">24.5</div><div class="vital-lbl">IMC</div><div class="vital-status badge-green">Normal</div></div>
+        </div>
+      </div>
+      <div class="dossier-grid">
+        <div class="record-section"><div class="card-hdr"><div class="card-title">Ordonnances</div><span class="card-action">+ Ajouter</span></div><div class="record-list" id="prescriptionList"></div></div>
+        <div class="record-section"><div class="card-hdr"><div class="card-title">Résultats d'analyses</div><span class="card-action">+ Ajouter</span></div><div class="record-list" id="analysisList"></div></div>
+        <div class="record-section"><div class="card-hdr"><div class="card-title">Antécédents médicaux</div></div><div id="antecedents" style="margin-top:12px;display:flex;flex-direction:column;gap:8px"></div></div>
+        <div class="record-section"><div class="card-hdr"><div class="card-title">Allergies & contre-indications</div></div><div id="allergies" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:7px"></div></div>
+      </div>
+    </div>
+
+    <!-- ── MÉDICAMENTS ── -->
+    <div class="section-view" id="view-medicaments">
+      <div class="flex-between" style="margin-bottom:18px">
+        <div><h1 class="section-title">Suivi des Médicaments</h1><p class="section-sub">Traitements en cours et historique des prises</p></div>
+        <button class="btn-new" onclick="openModal('medModal')"><i data-lucide="plus" style="width:14px;height:14px"></i>Ajouter</button>
+      </div>
+      <div class="meds-full-grid" id="medsFullGrid"></div>
+    </div>
+
+    <!-- ── ACTIVITÉ ── -->
+    <div class="section-view" id="view-activite">
+      <h1 class="section-title">Activité Physique</h1>
+      <p class="section-sub">Performances et objectifs bien-être de la semaine</p>
+      <div class="activity-section-grid">
+        <div class="activity-big-card">
+          <div class="card-hdr"><div class="card-title">Calories brûlées cette semaine</div><span style="font-size:.73rem;color:var(--muted)">Objectif : 3 500 kcal</span></div>
+          <div class="week-bars" id="weekBars"></div>
+        </div>
+        <div class="steps-radial" style="text-align:center">
+          <div class="card-title">Pas aujourd'hui</div>
+          <div style="position:relative;width:140px;height:140px;margin:12px auto 8px">
+            <svg viewBox="0 0 140 140" width="140" height="140">
+              <circle cx="70" cy="70" r="56" fill="none" stroke="var(--border2)" stroke-width="13"/>
+              <circle cx="70" cy="70" r="56" fill="none" stroke="var(--cyan)" stroke-width="13"
+                stroke-dasharray="351.9" stroke-dashoffset="77.4" stroke-linecap="round" transform="rotate(-90 70 70)"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <div style="font-family:var(--font-d);font-size:1.6rem;color:var(--snow)">7 832</div>
+              <div style="font-size:.68rem;color:var(--muted)">/ 10 000 pas</div>
+            </div>
+          </div>
+          <div style="font-size:.78rem;color:var(--green);font-weight:600">78% de l'objectif</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+        <div class="metric-card" style="--c-acc:#00E5CC"><div class="metric-icon" style="background:rgba(0,229,204,.12)"><i data-lucide="footprints" style="width:17px;height:17px;color:var(--cyan)"></i></div><div class="metric-label">Distance</div><div class="metric-value">24.3<span class="metric-unit">km</span></div><div class="metric-delta delta-up"><i data-lucide="trending-up" style="width:11px;height:11px"></i> +3.1 km</div></div>
+        <div class="metric-card" style="--c-acc:#FF5C7A"><div class="metric-icon" style="background:rgba(255,92,122,.12)"><i data-lucide="flame" style="width:17px;height:17px;color:var(--red)"></i></div><div class="metric-label">Calories</div><div class="metric-value">2 180<span class="metric-unit">kcal</span></div><div class="metric-delta delta-up"><i data-lucide="trending-up" style="width:11px;height:11px"></i> +12%</div></div>
+        <div class="metric-card" style="--c-acc:#22C55E"><div class="metric-icon" style="background:rgba(34,197,94,.12)"><i data-lucide="clock" style="width:17px;height:17px;color:var(--green)"></i></div><div class="metric-label">Temps actif</div><div class="metric-value">4h 35<span class="metric-unit">min</span></div><div class="metric-delta delta-up"><i data-lucide="check" style="width:11px;height:11px"></i> Objectif ✓</div></div>
+        <div class="metric-card" style="--c-acc:#B06EFF"><div class="metric-icon" style="background:rgba(176,110,255,.12)"><i data-lucide="moon" style="width:17px;height:17px;color:var(--purple)"></i></div><div class="metric-label">Sommeil moy.</div><div class="metric-value">7h 12<span class="metric-unit">min</span></div><div class="metric-delta delta-warn"><i data-lucide="minus" style="width:11px;height:11px"></i> -23 min</div></div>
+      </div>
+    </div>
+
+    <!-- ── CONSEILS ── -->
+    <div class="section-view" id="view-conseils">
+      <div class="conseils-hero">
+        <div><h1 class="conseils-hero-title">Votre santé,<br><em>bien informée</em></h1>
+          <p class="conseils-hero-sub">Conseils médicaux validés par des professionnels, adaptés à votre profil.</p></div>
+        <div style="width:72px;height:72px;border-radius:20px;background:var(--cyan-dim);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:2.4rem;flex-shrink:0">🩺</div>
+      </div>
+      <div class="conseils-grid" id="conseilsGrid"></div>
+    </div>
+
+    <!-- PHARMACIES SECTION (injected below) -->
+        <!-- ── PHARMACIES ── -->
+    <div class="section-view" id="view-pharmacies">
+      <!-- Hero -->
+      <div class="pharm-hero">
+        <div>
+          <div class="pharm-hero-title">Pharmacies <em>camerounaises</em></div>
+          <p class="pharm-hero-sub">Horaires d'ouverture et fermeture en temps réel, pharmacies de garde et localisation dans toutes les grandes villes du Cameroun.</p>
+        </div>
+        <div class="pharm-hero-icon">💊</div>
+      </div>
+
+      <!-- Live clock + status -->
+      <div class="pharm-clock">
+        <div>
+          <div class="pharm-clock-time" id="pharmClock">--:--:--</div>
+          <div class="pharm-clock-date" id="pharmDate">Chargement...</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+          <div class="pharm-clock-badge" id="pharmGlobalStatus">
+            <div class="clock-live-dot"></div>
+            <span id="pharmStatusText">Chargement...</span>
+          </div>
+          <div style="font-size:.75rem;color:var(--muted)">Horaires standards : 07h30 – 21h00 · Lun–Sam</div>
+        </div>
+      </div>
+
+      <!-- Garde banner -->
+      <div class="garde-banner" id="gardeBanner" style="display:none">
+        <div class="garde-banner-icon">🌙</div>
+        <div>
+          <div class="garde-banner-title">Pharmacies de garde actives cette nuit</div>
+          <div class="garde-banner-sub">Les pharmacies marquées "Garde" assurent un service 24h/24 cette nuit. Sonnez à la porte si fermée.</div>
+        </div>
+        <button class="btn-new" style="margin-left:auto;background:linear-gradient(135deg,var(--amber),#CC7A00);color:#000;box-shadow:0 4px 16px rgba(255,179,71,.3)" onclick="filterPharm('garde',document.querySelector('[data-f=garde]'))">
+          <i data-lucide="moon" style="width:14px;height:14px"></i> Voir les gardes
+        </button>
+      </div>
+
+      <!-- Summary stats -->
+      <div class="pharm-stats">
+        <div class="pharm-stat">
+          <div class="pharm-stat-num" style="color:var(--green)" id="statOpen">—</div>
+          <div class="pharm-stat-lbl">Ouvertes maintenant</div>
+        </div>
+        <div class="pharm-stat">
+          <div class="pharm-stat-num" style="color:var(--amber)" id="statGarde">—</div>
+          <div class="pharm-stat-lbl">De garde (24h)</div>
+        </div>
+        <div class="pharm-stat">
+          <div class="pharm-stat-num" style="color:var(--red)" id="statClosed">—</div>
+          <div class="pharm-stat-lbl">Fermées</div>
+        </div>
+        <div class="pharm-stat">
+          <div class="pharm-stat-num" style="color:var(--cyan)">18</div>
+          <div class="pharm-stat-lbl">Total répertoriées</div>
+        </div>
+      </div>
+
+      <!-- Toolbar -->
+      <div class="pharm-toolbar">
+        <div class="pharm-search">
+          <i data-lucide="search" style="width:15px;height:15px;color:var(--muted);flex-shrink:0"></i>
+          <input type="text" placeholder="Rechercher une pharmacie ou ville..." id="pharmSearch" oninput="searchPharm(this.value)"/>
+        </div>
+        <div class="pharm-filter-tabs">
+          <button class="pharm-tab active" data-f="toutes" onclick="filterPharm('toutes',this)">Toutes</button>
+          <button class="pharm-tab" data-f="ouverte" onclick="filterPharm('ouverte',this)">Ouvertes</button>
+          <button class="pharm-tab" data-f="garde" onclick="filterPharm('garde',this)">Garde 🌙</button>
+          <button class="pharm-tab" data-f="fermee" onclick="filterPharm('fermee',this)">Fermées</button>
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="pharm-tab" onclick="filterPharm('toutes',document.querySelector('[data-f=toutes]'));document.getElementById('pharmSearch').value='';filterByVille('Yaoundé')" style="border:1px solid var(--border2);border-radius:var(--r);background:var(--card)">📍 Yaoundé</button>
+          <button class="pharm-tab" onclick="filterByVille('Douala')" style="border:1px solid var(--border2);border-radius:var(--r);background:var(--card)">📍 Douala</button>
+        </div>
+      </div>
+
+      <!-- Pharmacy grid -->
+      <div class="pharm-grid" id="pharmGrid"></div>
+    </div>
+
+
+    <!-- ── PROFIL ── -->
+    <div class="section-view" id="view-profil">
+      <div class="profil-header">
+        <div class="profil-avatar-big">JD<div class="profil-online"></div></div>
+        <div>
+          <div class="profil-name">Jean Dupont</div>
+          <div class="profil-id">ID Patient : JH-2025-00471 · Inscrit le 12 jan. 2025</div>
+          <div class="profil-tags">
+            <span class="profil-tag">🩸 Groupe A+</span>
+            <span class="profil-tag">💊 Traitement en cours</span>
+            <span class="profil-tag">🫀 Suivi cardiaque</span>
+            <span class="profil-tag">🌍 Yaoundé, CM</span>
+          </div>
+        </div>
+        <button class="btn-new" style="margin-left:auto" onclick="showToast('Profil','Modification en cours...','var(--cyan)','edit')">
+          <i data-lucide="edit-3" style="width:14px;height:14px"></i>Modifier
+        </button>
+      </div>
+      <div class="profil-grid">
+        <div class="profil-section">
+          <div class="card-title" style="margin-bottom:4px">Informations personnelles</div>
+          <div class="profil-field"><span class="profil-field-label">Nom complet</span><span class="profil-field-value">Jean Dupont</span></div>
+          <div class="profil-field"><span class="profil-field-label">Date de naissance</span><span class="profil-field-value">15 Avril 1985 (39 ans)</span></div>
+          <div class="profil-field"><span class="profil-field-label">Genre</span><span class="profil-field-value">Masculin</span></div>
+          <div class="profil-field"><span class="profil-field-label">Téléphone</span><span class="profil-field-value">+237 6 55 42 38 10</span></div>
+          <div class="profil-field"><span class="profil-field-label">Email</span><span class="profil-field-value">j.dupont@email.com</span></div>
+          <div class="profil-field"><span class="profil-field-label">Ville</span><span class="profil-field-value">Yaoundé, Cameroun 🇨🇲</span></div>
+        </div>
+        <div class="profil-section">
+          <div class="card-title" style="margin-bottom:4px">Informations médicales</div>
+          <div class="profil-field"><span class="profil-field-label">Groupe sanguin</span><span class="profil-field-value" style="color:var(--red)">A Rhésus +</span></div>
+          <div class="profil-field"><span class="profil-field-label">Taille</span><span class="profil-field-value">178 cm</span></div>
+          <div class="profil-field"><span class="profil-field-label">Poids</span><span class="profil-field-value">78 kg</span></div>
+          <div class="profil-field"><span class="profil-field-label">IMC</span><span class="profil-field-value">24.5 (Normal)</span></div>
+          <div class="profil-field"><span class="profil-field-label">Médecin traitant</span><span class="profil-field-value">Dr. Aminatou Bello</span></div>
+          <div class="profil-field"><span class="profil-field-label">N° CNAM</span><span class="profil-field-value">CNAM-237-04712</span></div>
+        </div>
+        <div class="profil-section">
+          <div class="card-title" style="margin-bottom:4px">Sécurité & Accès</div>
+          <div class="profil-field"><span class="profil-field-label">Mot de passe</span><span class="profil-field-value">●●●●●●●●</span></div>
+          <div class="profil-field"><span class="profil-field-label">2FA</span><span class="profil-field-value" style="color:var(--green)">Activé</span></div>
+          <div class="profil-field"><span class="profil-field-label">Connexion</span><span class="profil-field-value">Aujourd'hui 08:34</span></div>
+        </div>
+        <div class="profil-section">
+          <div class="card-title" style="margin-bottom:4px">Notifications</div>
+          <div class="profil-field"><span class="profil-field-label">Rappels médicaments</span><span class="profil-field-value" style="color:var(--green)">Activé</span></div>
+          <div class="profil-field"><span class="profil-field-label">Rappels RDV</span><span class="profil-field-value" style="color:var(--green)">Activé</span></div>
+          <div class="profil-field"><span class="profil-field-label">Conseils santé</span><span class="profil-field-value" style="color:var(--green)">Activé</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PARAMÈTRES ── -->
+    <div class="section-view" id="view-parametres">
+      <h1 class="section-title">Paramètres</h1>
+      <p class="section-sub">Personnalisez votre expérience JAYSON HEALTH</p>
+      <div style="max-width:600px;display:flex;flex-direction:column;gap:14px">
+        <div class="profil-section">
+          <div class="card-title" style="margin-bottom:4px">Apparence</div>
+          <div class="profil-field"><span class="profil-field-label">Thème</span><span style="color:var(--cyan);font-size:.87rem">Sombre (défaut)</span></div>
+          <div class="profil-field"><span class="profil-field-label">Langue</span><span class="profil-field-value">Français</span></div>
+          <div class="profil-field"><span class="profil-field-label">Fuseau horaire</span><span class="profil-field-value">UTC+1 (Yaoundé)</span></div>
+        </div>
+        <div class="profil-section">
+          <div class="card-title" style="margin-bottom:4px">À propos de JAYSON HEALTH</div>
+          <div class="profil-field"><span class="profil-field-label">Version</span><span class="profil-field-value">v2.2.0</span></div>
+          <div class="profil-field"><span class="profil-field-label">Pharmacies répertoriées</span><span class="profil-field-value" style="color:var(--cyan)">18 pharmacies 🇨🇲</span></div>
+          <div class="profil-field"><span class="profil-field-label">Développé par</span>
+            <span style="color:var(--cyan);font-family:var(--font-d);font-style:italic;font-size:1rem">SOUMELONG JORDAN</span>
+          </div>
+          <div class="profil-field"><span class="profil-field-label">Licence</span><span class="profil-field-value">© 2025 JAYSON HEALTH</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- content-area -->
+</div><!-- main -->
+</div><!-- appLayout -->
+
+
+<!-- MODAL RDV -->
+<div class="modal-overlay" id="rdvModal" onclick="closeModal(event,'rdvModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Nouveau Rendez-vous</div>
+    <div class="modal-sub">Planifiez une consultation médicale</div>
+    <div class="form-group">
+      <label class="form-label">Spécialité</label>
+      <select class="form-input-modal" id="rdvSpec">
+        <option>Médecin généraliste</option><option>Cardiologue</option>
+        <option>Gynécologue</option><option>Pédiatre</option>
+        <option>Ophtalmologue</option><option>Dentiste</option><option>Dermatologue</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Médecin</label>
+      <input type="text" class="form-input-modal" id="rdvDr" placeholder="Nom du médecin"/>
+    </div>
+    <div class="form-row-modal">
+      <div class="form-group"><label class="form-label">Date</label><input type="date" class="form-input-modal" id="rdvDate"/></div>
+      <div class="form-group"><label class="form-label">Heure</label><input type="time" class="form-input-modal" id="rdvTime"/></div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Motif</label>
+      <textarea class="form-input-modal" rows="3" id="rdvMotif" placeholder="Motif de consultation..." style="resize:none"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="document.getElementById('rdvModal').classList.remove('open')">Annuler</button>
+      <button class="btn-confirm" onclick="saveRdv()">Confirmer le RDV</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MÉDICAMENT -->
+<div class="modal-overlay" id="medModal" onclick="closeModal(event,'medModal')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-title">Ajouter un médicament</div>
+    <div class="modal-sub">Enregistrez un nouveau traitement à suivre</div>
+    <div class="form-row-modal">
+      <div class="form-group"><label class="form-label">Nom du médicament</label><input type="text" class="form-input-modal" placeholder="Ex: Paracétamol"/></div>
+      <div class="form-group"><label class="form-label">Dosage</label><input type="text" class="form-input-modal" placeholder="Ex: 500mg"/></div>
+    </div>
+    <div class="form-row-modal">
+      <div class="form-group"><label class="form-label">Fréquence</label>
+        <select class="form-input-modal"><option>1x/jour</option><option>2x/jour</option><option>3x/jour</option></select>
+      </div>
+      <div class="form-group"><label class="form-label">Durée</label><input type="text" class="form-input-modal" placeholder="Ex: 7 jours"/></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" onclick="document.getElementById('medModal').classList.remove('open')">Annuler</button>
+      <button class="btn-confirm" onclick="saveMed()">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+<script>
+
+/* ══════════════════════════════════════════════════════════
+   LOGIN
+══════════════════════════════════════════════════════════ */
+function switchTab(tab, btn) {
+  document.querySelectorAll('.login-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-connexion').style.display = tab==='connexion'?'block':'none';
+  document.getElementById('tab-inscription').style.display = tab==='inscription'?'block':'none';
+}
+function togglePw(id, btn) {
+  const inp = document.getElementById(id);
+  const isText = inp.type==='text';
+  inp.type = isText ? 'password' : 'text';
+  btn.innerHTML = isText
+    ? '<i data-lucide="eye" style="width:16px;height:16px"></i>'
+    : '<i data-lucide="eye-off" style="width:16px;height:16px"></i>';
+  lucide.createIcons();
+}
+function doLogin() {
+  const btn = document.querySelector('.btn-login');
+  btn.textContent = 'Connexion en cours...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('loginPage').classList.add('hidden');
+    const app = document.getElementById('appLayout');
+    app.classList.add('show');
+    initApp();
+    showToast('Bienvenue Jean 👋','Connexion réussie. 2 RDV aujourd\'hui !','var(--cyan)','heart-pulse');
+  }, 1200);
+}
+
+/* ══════════════════════════════════════════════════════════
+   ROUTING
+══════════════════════════════════════════════════════════ */
+function showView(id, navEl) {
+  document.querySelectorAll('.section-view').forEach(v=>v.classList.remove('active'));
+  const view = document.getElementById('view-'+id);
+  if(view) view.classList.add('active');
+  if(navEl) {
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    navEl.classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-item').forEach(n=>{
+      if(n.getAttribute('onclick')&&n.getAttribute('onclick').includes("'"+id+"'")) {
+        document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+        n.classList.add('active');
+      }
+    });
+  }
+}
+function doLogout() {
+  document.getElementById('appLayout').classList.remove('show');
+  document.getElementById('loginPage').classList.remove('hidden');
+  const btn = document.querySelector('.btn-login');
+  btn.innerHTML = '<i data-lucide="log-in" style="width:18px;height:18px"></i> Se connecter';
+  btn.disabled = false;
+  lucide.createIcons();
+}
+
+/* ══════════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════════ */
+const METRICS = [
+  {label:'Glycémie',value:'5.4',unit:'mmol/L',icon:'droplets',acc:'00E5CC',delta:'+0.2 vs hier',dir:'warn',mini:[5.1,5.3,5.4,5.2,5.6,5.4,5.4]},
+  {label:'Tension',value:'120/80',unit:'mmHg',icon:'heart-pulse',acc:'FF5C7A',delta:'Stable',dir:'up',mini:[118,122,120,119,121,120,120]},
+  {label:'Poids',value:'78.2',unit:'kg',icon:'scale',acc:'FFB347',delta:'-0.3 kg ce mois',dir:'up',mini:[79,78.8,78.5,78.4,78.3,78.2,78.2]},
+  {label:'Sommeil',value:'7h 12',unit:'',icon:'moon',acc:'B06EFF',delta:'-23 min objectif',dir:'warn',mini:[6.5,7.2,7.5,6.8,7.1,7.8,7.2]},
+];
+
+const RDV_DATA = [
+  {dr:'Dr. Aminatou Bello',spec:'Médecin généraliste',lieu:'Clinique Centrale, Yaoundé',date:'2025-03-09',heure:'09:30',statut:'confirmé',motif:'Suivi mensuel hypertension',ini:'AB',color:'00E5CC'},
+  {dr:'Dr. Paul Mvondo',spec:'Cardiologue',lieu:'Clinique de l\'Espoir, Yaoundé',date:'2025-03-09',heure:'14:00',statut:'en attente',motif:'Contrôle ECG et résultats Holter',ini:'PM',color:'FF5C7A'},
+  {dr:'Dr. Chantal Nga',spec:'Gynécologue',lieu:'Centre Médical Bastos, Yaoundé',date:'2025-03-15',heure:'10:30',statut:'confirmé',motif:'Bilan annuel',ini:'CN',color:'B06EFF'},
+  {dr:'Dr. Ibrahim Sow',spec:'Ophtalmologue',lieu:'Cabinet Vision Plus, Douala',date:'2025-03-20',heure:'11:00',statut:'en attente',motif:'Contrôle vue et fond d\'oeil',ini:'IS',color:'FFB347'},
+  {dr:'Dr. Marie Ekambi',spec:'Dermatologue',lieu:'Clinique Acacias, Yaoundé',date:'2025-02-20',heure:'09:00',statut:'passé',motif:'Eczéma chronique',ini:'ME',color:'22C55E'},
+  {dr:'Dr. Jean-Pierre Fouda',spec:'Dentiste',lieu:'Cabinet Dentaire Elite, Yaoundé',date:'2025-02-05',heure:'15:30',statut:'passé',motif:'Détartrage semestriel',ini:'JF',color:'4DA6FF'},
+];
+
+const MEDS_DATA = [
+  {name:'Amoxicilline',gen:'Pénicilline / Antibiotique',icon:'💊',acc:'00E5CC',dose:'500 mg',freq:'3x/jour',prog:60,slots:[{t:'Matin',s:'taken'},{t:'Midi',s:'taken'},{t:'Soir',s:'pending'}],days:5,total:10},
+  {name:'Metformine',gen:'Biguanide / Antidiabétique',icon:'🔶',acc:'FFB347',dose:'850 mg',freq:'2x/jour',prog:80,slots:[{t:'Matin',s:'taken'},{t:'Soir',s:'taken'},{t:'—',s:'missed'}],days:24,total:30},
+  {name:'Lisinopril',gen:'IEC / Antihypertenseur',icon:'❤️',acc:'FF5C7A',dose:'10 mg',freq:'1x/jour',prog:90,slots:[{t:'Matin',s:'taken'},{t:'—',s:'missed'},{t:'—',s:'missed'}],days:27,total:30},
+  {name:'Vitamine D3',gen:'Supplément vitaminique',icon:'🌟',acc:'FFB347',dose:'1000 UI',freq:'1x/jour',prog:45,slots:[{t:'Matin',s:'taken'},{t:'—',s:'missed'},{t:'—',s:'missed'}],days:14,total:30},
+  {name:'Oméprazole',gen:'Inhibiteur pompe protons',icon:'🟡',acc:'22C55E',dose:'20 mg',freq:'1x/jour',prog:70,slots:[{t:'Matin',s:'taken'},{t:'—',s:'missed'},{t:'—',s:'missed'}],days:21,total:30},
+  {name:'Atorvastatine',gen:'Statine / Hypolipémiant',icon:'💙',acc:'4DA6FF',dose:'20 mg',freq:'1x/soir',prog:55,slots:[{t:'Soir',s:'taken'},{t:'—',s:'missed'},{t:'—',s:'missed'}],days:17,total:30},
+];
+
+const WEEK_DATA = [
+  {day:'Lun',kcal:380},{day:'Mar',kcal:520},{day:'Mer',kcal:280},
+  {day:'Jeu',kcal:600},{day:'Ven',kcal:420},{day:'Sam',kcal:540},{day:'Dim',kcal:440},
+];
+
+const CONSEILS_DATA = [
+  {tag:'Nutrition',tc:'var(--green)',title:'Alimentation équilibrée et diabète type 2',excerpt:'Comment adapter votre alimentation pour contrôler votre glycémie avec des choix simples au quotidien.',author:'Dr. Nguema · Diabétologue',read:'5 min',emoji:'🥗'},
+  {tag:'Cardiovasculaire',tc:'var(--red)',title:'L\'hypertension : comprendre et agir',excerpt:'Tout ce que vous devez savoir sur la gestion de la tension artérielle, style de vie et traitement.',author:'Dr. Mvondo · Cardiologue',read:'7 min',emoji:'🫀'},
+  {tag:'Activité physique',tc:'var(--cyan)',title:'30 minutes par jour : les bénéfices prouvés',excerpt:'Des études confirment qu\'une activité modérée quotidienne réduit les risques cardiovasculaires.',author:'Dr. Bello · Médecin généraliste',read:'4 min',emoji:'🏃'},
+  {tag:'Sommeil',tc:'var(--purple)',title:'Mieux dormir pour mieux récupérer',excerpt:'Le sommeil de qualité est un pilier fondamental. Découvrez les meilleures pratiques du sommeil.',author:'Dr. Fouda · Neurologue',read:'6 min',emoji:'😴'},
+  {tag:'Prévention',tc:'var(--amber)',title:'Vaccinations et bilans : ne manquez rien',excerpt:'Le calendrier vaccinal et les bilans annuels recommandés selon votre âge et facteurs de risque.',author:'Équipe JAYSON HEALTH',read:'8 min',emoji:'💉'},
+  {tag:'Mental & Stress',tc:'var(--blue)',title:'Gérer le stress chronique',excerpt:'La gestion du stress est essentielle pour votre bien-être global. Techniques validées par des pros.',author:'Dr. Kamga · Psychiatre',read:'5 min',emoji:'🧘'},
+];
+
+/* ══════════════════════════════════════════════════════════
+   PHARMACIES DATA (horaires réels Cameroun)
+══════════════════════════════════════════════════════════ */
+const PHARMACIES = [
+  {
+    nom:'Pharmacie du Centre',emoji:'🏥',ville:'Yaoundé',quartier:'Centre-ville',
+    tel:'+237 222 22 10 10',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h30',
+      'Samedi':'08h00 – 20h00',
+      'Dimanche':'08h00 – 13h00'
+    },
+    ouverture:'07:30',fermeture:'20:30',joursOuverts:[1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Parapharmacie','Ordonnances'],
+    note:'Parking disponible'
+  },
+  {
+    nom:'Pharmacie Bastos',emoji:'💊',ville:'Yaoundé',quartier:'Bastos',
+    tel:'+237 222 21 36 04',
+    schedule:{
+      'Lun-Ven':'07h30 – 21h00',
+      'Samedi':'08h00 – 21h00',
+      'Dimanche':'09h00 – 14h00'
+    },
+    ouverture:'07:30',fermeture:'21:00',joursOuverts:[1,2,3,4,5,6,0],
+    garde:false,services:['Médicaments','Laboratoire','Vaccins'],
+    note:'Quartier diplomatique'
+  },
+  {
+    nom:'Pharmacie de l\'Espoir',emoji:'✨',ville:'Yaoundé',quartier:'Nlongkak',
+    tel:'+237 222 20 45 67',
+    schedule:{
+      'Lun-Sam':'07h00 – 22h00',
+      'Dimanche':'07h00 – 22h00',
+      'Garde':'22h00 – 07h00 (urgences)'
+    },
+    ouverture:'07:00',fermeture:'22:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:true,services:['24h/24','Urgences','Médicaments','Injections'],
+    note:'Pharmacie de garde certifiée'
+  },
+  {
+    nom:'Pharmacie Biyem-Assi',emoji:'🌿',ville:'Yaoundé',quartier:'Biyem-Assi',
+    tel:'+237 222 31 12 89',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h00',
+      'Samedi':'08h00 – 19h00',
+      'Dimanche':'Fermé'
+    },
+    ouverture:'07:30',fermeture:'20:00',joursOuverts:[1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Cosmétiques','Bébé'],
+    note:'Fermé dimanche'
+  },
+  {
+    nom:'Pharmacie Santa Barbara',emoji:'🔴',ville:'Yaoundé',quartier:'Melen',
+    tel:'+237 222 22 71 33',
+    schedule:{
+      'Lun-Dim':'07h00 – 23h00',
+      'Garde nuit':'23h00 – 07h00 (urgences)'
+    },
+    ouverture:'07:00',fermeture:'23:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:true,services:['24h/24','Urgences','Injections','Perfusions'],
+    note:'Service urgences nocturnes'
+  },
+  {
+    nom:'Pharmacie Fouda',emoji:'🏪',ville:'Yaoundé',quartier:'Mvog-Mbi',
+    tel:'+237 222 23 55 80',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h30',
+      'Samedi':'08h00 – 20h00',
+      'Dimanche':'Fermé'
+    },
+    ouverture:'07:30',fermeture:'20:30',joursOuverts:[1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Parapharmacie'],
+    note:'Tarifs compétitifs'
+  },
+  {
+    nom:'Pharmacie du Littoral',emoji:'🌊',ville:'Douala',quartier:'Bonanjo',
+    tel:'+237 233 42 10 50',
+    schedule:{
+      'Lun-Ven':'07h30 – 21h00',
+      'Samedi':'08h00 – 21h00',
+      'Dimanche':'09h00 – 13h00'
+    },
+    ouverture:'07:30',fermeture:'21:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Dispositifs médicaux','Ordonnances'],
+    note:'Centre commercial Bonanjo'
+  },
+  {
+    nom:'Pharmacie Akwa Palace',emoji:'👑',ville:'Douala',quartier:'Akwa',
+    tel:'+237 233 43 22 11',
+    schedule:{
+      'Lun-Dim':'07h00 – 23h30',
+      'Garde':'23h30 – 07h00 (urgences)'
+    },
+    ouverture:'07:00',fermeture:'23:30',joursOuverts:[0,1,2,3,4,5,6],
+    garde:true,services:['24h/24','Urgences','Médicaments','Optique'],
+    note:'Face à l\'Hôtel Akwa Palace'
+  },
+  {
+    nom:'Pharmacie Ndokotti',emoji:'💚',ville:'Douala',quartier:'Ndokotti',
+    tel:'+237 233 40 77 92',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h30',
+      'Samedi':'08h00 – 20h00',
+      'Dimanche':'09h00 – 13h00'
+    },
+    ouverture:'07:30',fermeture:'20:30',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Herboristerie','Cosmétiques'],
+    note:'Marché Ndokotti'
+  },
+  {
+    nom:'Pharmacie de la Paix',emoji:'☮️',ville:'Douala',quartier:'Deido',
+    tel:'+237 233 38 14 20',
+    schedule:{
+      'Lun-Sam':'07h30 – 21h00',
+      'Dimanche':'Fermé'
+    },
+    ouverture:'07:30',fermeture:'21:00',joursOuverts:[1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Parapharmacie','Bébé'],
+    note:'Fermé le dimanche'
+  },
+  {
+    nom:'Pharmacie Melen Plus',emoji:'🌟',ville:'Yaoundé',quartier:'Melen',
+    tel:'+237 222 30 11 44',
+    schedule:{
+      'Lun-Sam':'07h30 – 21h00',
+      'Dimanche':'09h00 – 15h00'
+    },
+    ouverture:'07:30',fermeture:'21:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Vaccins','Analyses'],
+    note:'Proche CHU Yaoundé'
+  },
+  {
+    nom:'Pharmacie des Artisans',emoji:'🔧',ville:'Bafoussam',quartier:'Centre',
+    tel:'+237 233 44 22 33',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h00',
+      'Samedi':'08h00 – 19h00',
+      'Dimanche':'Fermé'
+    },
+    ouverture:'07:30',fermeture:'20:00',joursOuverts:[1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Parapharmacie'],
+    note:'Quartier artisanal'
+  },
+  {
+    nom:'Pharmacie du Wouri',emoji:'🚢',ville:'Douala',quartier:'Bali',
+    tel:'+237 233 41 55 67',
+    schedule:{
+      'Lun-Dim':'07h00 – 22h00',
+      'Garde':'22h00 – 07h00'
+    },
+    ouverture:'07:00',fermeture:'22:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:true,services:['24h/24','Urgences','Médicaments'],
+    note:'Zone portuaire, service continu'
+  },
+  {
+    nom:'Pharmacie Centrale Garoua',emoji:'🌵',ville:'Garoua',quartier:'Centre',
+    tel:'+237 222 27 18 90',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h00',
+      'Samedi':'08h00 – 18h00',
+      'Dimanche':'Fermé'
+    },
+    ouverture:'07:30',fermeture:'20:00',joursOuverts:[1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Ordonnances'],
+    note:'Principale ville du Nord'
+  },
+  {
+    nom:'Pharmacie du Sahel',emoji:'☀️',ville:'Maroua',quartier:'Centre',
+    tel:'+237 222 29 44 11',
+    schedule:{
+      'Lun-Ven':'07h00 – 19h30',
+      'Samedi':'07h30 – 18h00',
+      'Dimanche':'08h00 – 12h00'
+    },
+    ouverture:'07:00',fermeture:'19:30',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Paludisme','Vaccins'],
+    note:'Zone sahélienne, médicaments tropicaux'
+  },
+  {
+    nom:'Pharmacie Kribi Plage',emoji:'🏖️',ville:'Kribi',quartier:'Bord de mer',
+    tel:'+237 233 46 12 55',
+    schedule:{
+      'Lun-Sam':'07h30 – 20h00',
+      'Dimanche':'09h00 – 14h00'
+    },
+    ouverture:'07:30',fermeture:'20:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Anti-paludéens','Cosmétiques'],
+    note:'Plage de Kribi, touristes bienvenus'
+  },
+  {
+    nom:'Pharmacie St-Louis',emoji:'⚕️',ville:'Yaoundé',quartier:'Etoa-Meki',
+    tel:'+237 222 20 67 31',
+    schedule:{
+      'Lun-Sam':'07h30 – 21h30',
+      'Dimanche':'09h00 – 16h00',
+    },
+    ouverture:'07:30',fermeture:'21:30',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Pansements','Matériel médical'],
+    note:'Proche clinique St-Louis'
+  },
+  {
+    nom:'Pharmacie Seme Beach',emoji:'🌴',ville:'Limbe',quartier:'Down Beach',
+    tel:'+237 233 33 22 10',
+    schedule:{
+      'Lun-Ven':'07h30 – 20h00',
+      'Sam-Dim':'08h00 – 18h00'
+    },
+    ouverture:'07:30',fermeture:'20:00',joursOuverts:[0,1,2,3,4,5,6],
+    garde:false,services:['Médicaments','Anglophone','Ordonnances'],
+    note:'Zone anglophone, service bilingue'
+  },
+];
+
+/* ══════════════════════════════════════════════════════════
+   PHARMACY STATUS ENGINE
+══════════════════════════════════════════════════════════ */
+function getPharmStatus(pharm) {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun,1=Mon,...6=Sat
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const currentMins = h*60+m;
+
+  const [oH,oM] = pharm.ouverture.split(':').map(Number);
+  const [fH,fM] = pharm.fermeture.split(':').map(Number);
+  const openMins = oH*60+oM;
+  const closeMins = fH*60+fM;
+
+  const isOpenDay = pharm.joursOuverts.includes(day);
+
+  if(pharm.garde) return 'garde';
+  if(!isOpenDay) return 'fermee';
+  if(currentMins >= openMins && currentMins < closeMins) return 'ouverte';
+  return 'fermee';
+}
+
+function statusLabel(s) {
+  if(s==='ouverte') return {cls:'status-open',text:'Ouverte',dot:'🟢'};
+  if(s==='garde')   return {cls:'status-garde',text:'Garde 24h',dot:'🟡'};
+  return {cls:'status-closed',text:'Fermée',dot:'🔴'};
+}
+
+function renderPharmStats() {
+  const open = PHARMACIES.filter(p=>getPharmStatus(p)==='ouverte').length;
+  const garde = PHARMACIES.filter(p=>getPharmStatus(p)==='garde').length;
+  const closed = PHARMACIES.filter(p=>getPharmStatus(p)==='fermee').length;
+  document.getElementById('statOpen').textContent = open;
+  document.getElementById('statGarde').textContent = garde;
+  document.getElementById('statClosed').textContent = closed;
+  if(garde>0 || new Date().getHours()>=21) {
+    document.getElementById('gardeBanner').style.display='flex';
+  }
+}
+
+let pharmFilter = 'toutes';
+let pharmSearch = '';
+let pharmVille = '';
+
+function filterPharm(f, btn) {
+  pharmFilter = f;
+  pharmVille = '';
+  document.getElementById('pharmSearch').value = '';
+  pharmSearch = '';
+  document.querySelectorAll('.pharm-tab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderPharms();
+}
+function searchPharm(v) {
+  pharmSearch = v.toLowerCase();
+  renderPharms();
+}
+function filterByVille(v) {
+  pharmVille = v;
+  pharmFilter = 'toutes';
+  document.querySelectorAll('.pharm-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-f=toutes]').classList.add('active');
+  renderPharms();
+}
+
+function renderPharms() {
+  let list = [...PHARMACIES];
+  // Status filter
+  if(pharmFilter!=='toutes') {
+    list = list.filter(p=>getPharmStatus(p)===pharmFilter);
+  }
+  // Ville filter
+  if(pharmVille) {
+    list = list.filter(p=>p.ville===pharmVille);
+  }
+  // Search
+  if(pharmSearch) {
+    list = list.filter(p=>
+      p.nom.toLowerCase().includes(pharmSearch)||
+      p.ville.toLowerCase().includes(pharmSearch)||
+      p.quartier.toLowerCase().includes(pharmSearch)
+    );
+  }
+  // Sort: garde first, then open, then closed
+  list.sort((a,b)=>{
+    const order={'garde':0,'ouverte':1,'fermee':2};
+    return order[getPharmStatus(a)]-order[getPharmStatus(b)];
+  });
+
+  const grid = document.getElementById('pharmGrid');
+  if(!grid) return;
+  if(list.length===0){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--muted)">
+      <div style="font-size:3rem;margin-bottom:12px">🔍</div>
+      <div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:6px">Aucune pharmacie trouvée</div>
+      <div style="font-size:.85rem">Essayez un autre filtre ou une autre ville</div>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(p=>{
+    const st = getPharmStatus(p);
+    const sl = statusLabel(st);
+    const schedItems = Object.entries(p.schedule).slice(0,2).map(([day,hours])=>`
+      <div class="pharm-schedule-item">
+        <div class="pharm-sched-day">${day}</div>
+        <div class="pharm-sched-hours ${hours==='Fermé'?'closed-txt':''}">${hours}</div>
+      </div>`).join('');
+    const tags = p.services.map(s=>`<span class="pharm-service-tag">${s}</span>`).join('');
+    return `
+      <div class="pharm-card">
+        <div class="pharm-card-top">
+          <div style="display:flex;align-items:center;gap:12px;flex:1">
+            <div class="pharm-avatar">${p.emoji}</div>
+            <div>
+              <div class="pharm-name">${p.nom}</div>
+              <div class="pharm-ville"><i data-lucide="map-pin" style="width:12px;height:12px"></i> ${p.quartier}, ${p.ville}</div>
+            </div>
+          </div>
+          <div class="pharm-status-badge ${sl.cls}">${sl.dot} ${sl.text}</div>
+        </div>
+        <div class="pharm-card-body">
+          <div class="pharm-schedule-grid">${schedItems}</div>
+          <div class="pharm-info-row"><i data-lucide="phone" style="width:13px;height:13px"></i> ${p.tel}</div>
+          ${p.note?`<div class="pharm-info-row"><i data-lucide="info" style="width:13px;height:13px"></i> <em>${p.note}</em></div>`:''}
+        </div>
+        <div class="pharm-card-footer">
+          <div class="pharm-services">${tags}</div>
+          <button class="btn-pharm" onclick="showToast('${p.nom}','Appel en cours: ${p.tel}','var(--green)','phone')">
+            <span>📞 Appeler</span>
+          </button>
+        </div>
+      </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+/* ══════════════════════════════════════════════════════════
+   LIVE CLOCK
+══════════════════════════════════════════════════════════ */
+function updatePharmClock() {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  const ss = String(now.getSeconds()).padStart(2,'0');
+  const el = document.getElementById('pharmClock');
+  const de = document.getElementById('pharmDate');
+  if(!el) return;
+  el.textContent = `${hh}:${mm}:${ss}`;
+  const jours = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+  const mois = ['jan.','fév.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  de.textContent = `${jours[now.getDay()]} ${now.getDate()} ${mois[now.getMonth()]} ${now.getFullYear()}`;
+
+  const h = now.getHours();
+  const badge = document.getElementById('pharmGlobalStatus');
+  const text = document.getElementById('pharmStatusText');
+  if(badge && text) {
+    if(h >= 7 && h < 21) {
+      badge.className='pharm-clock-badge';
+      text.textContent='Pharmacies ouvertes';
+    } else if(h >= 21 || h < 1) {
+      badge.className='pharm-clock-badge garde';
+      text.textContent='Horaires de garde actifs';
+    } else {
+      badge.className='pharm-clock-badge fermee';
+      text.textContent='Majorité fermées';
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   DASHBOARD RENDERS
+══════════════════════════════════════════════════════════ */
+function renderMetrics() {
+  const g = document.getElementById('metricCards');
+  if(!g) return;
+  g.innerHTML = METRICS.map(m=>{
+    const pts = m.mini.map((v,i)=>{
+      const mn=Math.min(...m.mini),mx=Math.max(...m.mini);
+      return `${(i/(m.mini.length-1))*100},${32-((v-mn)/(mx-mn||1))*28}`;
+    }).join(' ');
+    const dirCls = m.dir==='up'?'delta-up':m.dir==='down'?'delta-down':'delta-warn';
+    const dirIcon = m.dir==='up'?'trending-up':m.dir==='down'?'trending-down':'minus';
+    return `
+      <div class="metric-card" style="--c-acc:#${m.acc}">
+        <div class="metric-icon" style="background:rgba(${hr(m.acc)},.12)">
+          <i data-lucide="${m.icon}" style="width:18px;height:18px;color:#${m.acc}"></i>
+        </div>
+        <div class="metric-label">${m.label}</div>
+        <div class="metric-value">${m.value}<span class="metric-unit">${m.unit}</span></div>
+        <div class="metric-delta ${dirCls}">
+          <i data-lucide="${dirIcon}" style="width:11px;height:11px"></i> ${m.delta}
+        </div>
+        <div class="mini-chart">
+          <svg viewBox="0 0 100 32" preserveAspectRatio="none">
+            <polyline points="${pts}" fill="none" stroke="#${m.acc}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+function hr(hex){return [parseInt(hex.slice(0,2),16),parseInt(hex.slice(2,4),16),parseInt(hex.slice(4,6),16)].join(',')}
+
+function renderRdv(f='tous') {
+  const g = document.getElementById('rdvGrid');
+  if(!g) return;
+  const STMAP = {'confirmé':{cls:'badge-green',lbl:'Confirmé'},'en attente':{cls:'badge-amber',lbl:'En attente'},'passé':{cls:'badge-blue',lbl:'Passé'}};
+  const list = f==='tous' ? RDV_DATA : RDV_DATA.filter(r=>r.statut===f);
+  g.innerHTML = list.map(r=>{
+    const st = STMAP[r.statut]||{cls:'badge-blue',lbl:r.statut};
+    const d = new Date(r.date);
+    const ds = d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+    return `
+      <div class="rdv-card">
+        <div class="rdv-card-top">
+          <div class="dr-avatar" style="border-color:#${r.color};color:#${r.color};background:rgba(${hr(r.color)},.08)">${r.ini}</div>
+          <div style="flex:1">
+            <div class="rdv-dr-name">${r.dr}</div>
+            <div class="rdv-dr-spec">${r.spec}</div>
+          </div>
+          <span class="appt-badge ${st.cls}" style="font-size:.65rem;padding:3px 9px;border-radius:99px">${st.lbl}</span>
+        </div>
+        <div class="rdv-info-row"><i data-lucide="calendar" style="width:13px;height:13px"></i> ${ds}</div>
+        <div class="rdv-info-row"><i data-lucide="clock" style="width:13px;height:13px"></i> ${r.heure}</div>
+        <div class="rdv-info-row"><i data-lucide="map-pin" style="width:13px;height:13px"></i> ${r.lieu}</div>
+        <div class="rdv-info-row"><i data-lucide="file-text" style="width:13px;height:13px"></i> <em>${r.motif}</em></div>
+        <div class="rdv-footer">
+          <div class="rdv-btns">
+            <button class="btn-sm btn-sm-cyan" onclick="showToast('RDV','Détails ouverts','var(--cyan)','calendar-check')">Détails</button>
+            ${r.statut!=='passé'?'<button class="btn-sm btn-sm-outline" onclick="showToast(\'Annulation\',\'Demande envoyée\',\'var(--red)\',\'x\')">Annuler</button>':''}
+          </div>
+          ${r.statut==='passé'?'<span style="font-size:.73rem;color:var(--muted)">Terminé</span>':''}
+        </div>
+      </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+function renderMeds() {
+  const g = document.getElementById('medsFullGrid');
+  if(!g) return;
+  g.innerHTML = MEDS_DATA.map(m=>{
+    const slots = m.slots.map(s=>`
+      <div class="med-slot ${s.s}">
+        <div class="med-slot-time">${s.t}</div>
+        <div class="med-slot-status">${s.s==='taken'?'✓ Pris':s.s==='pending'?'⏳':'✗ Manqué'}</div>
+      </div>`).join('');
+    return `
+      <div class="med-full-card">
+        <div class="med-full-top">
+          <div class="med-pill-icon" style="background:rgba(${hr(m.acc)},.1)">${m.icon}</div>
+          <div>
+            <div class="med-full-name">${m.name}</div>
+            <div class="med-full-gen">${m.gen}</div>
+            <div style="font-size:.73rem;color:#${m.acc};margin-top:4px;font-weight:600">${m.dose} — ${m.freq}</div>
+          </div>
+        </div>
+        <div class="med-prog-label"><span>Traitement</span><span>${m.days}/${m.total} j</span></div>
+        <div class="med-prog-track">
+          <div class="med-prog-fill" style="width:${m.prog}%;background:linear-gradient(90deg,#${m.acc},rgba(${hr(m.acc)},.4))"></div>
+        </div>
+        <div class="med-schedule">${slots}</div>
+      </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+function renderWeekBars() {
+  const g = document.getElementById('weekBars');
+  if(!g) return;
+  const dayIdx = new Date().getDay();
+  const map=[6,0,1,2,3,4,5];
+  const maxK = Math.max(...WEEK_DATA.map(d=>d.kcal));
+  g.innerHTML = WEEK_DATA.map((d,i)=>{
+    const isToday = map[dayIdx]===i;
+    const pct=(d.kcal/maxK)*100;
+    const clr=isToday?'var(--cyan)':`rgba(0,229,204,${0.25+(pct/100)*.55})`;
+    return `
+      <div class="week-bar-wrap">
+        <div style="font-size:.68rem;color:var(--cyan);font-weight:700;margin-bottom:3px">${d.kcal}</div>
+        <div class="week-bar" style="height:${pct}%;background:${clr};width:100%;${isToday?'box-shadow:0 0 10px rgba(0,229,204,.4)':''}"></div>
+        <div class="week-day">${d.day}</div>
+      </div>`;
+  }).join('');
+}
+
+function renderConseils() {
+  const g = document.getElementById('conseilsGrid');
+  if(!g) return;
+  g.innerHTML = CONSEILS_DATA.map(c=>`
+    <div class="conseil-card">
+      <div style="font-size:1.8rem;margin-bottom:10px">${c.emoji}</div>
+      <span class="conseil-tag" style="background:rgba(0,0,0,.3);color:${c.tc};border:1px solid ${c.tc}40">${c.tag}</span>
+      <div class="conseil-title">${c.title}</div>
+      <div class="conseil-excerpt">${c.excerpt}</div>
+      <div class="conseil-footer">
+        <div class="conseil-author">${c.author}</div>
+        <div class="conseil-read">${c.read} →</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderDossier() {
+  const pl = document.getElementById('prescriptionList');
+  const al = document.getElementById('analysisList');
+  const an = document.getElementById('antecedents');
+  const al2 = document.getElementById('allergies');
+  if(pl) pl.innerHTML = [
+    {n:'Ordonnance Dr. Bello',d:'07 Mars 2025',t:'📄',s:'128 KB'},
+    {n:'Ordonnance Cardiologie',d:'14 Fév. 2025',t:'📄',s:'96 KB'},
+    {n:'Renouvellement Metformine',d:'01 Fév. 2025',t:'📄',s:'84 KB'},
+  ].map(p=>`<div class="record-item"><div class="record-file-icon" style="background:var(--cyan-dim)">${p.t}</div>
+    <div><div class="record-name">${p.n}</div><div class="record-date">${p.d}</div></div>
+    <span class="record-size">${p.s}</span></div>`).join('');
+  if(al) al.innerHTML = [
+    {n:'Glycémie à jeun',d:'05 Mars 2025',t:'🧪',s:'245 KB'},
+    {n:'Bilan lipidique complet',d:'20 Fév. 2025',t:'🧪',s:'312 KB'},
+    {n:'NFS + CRP',d:'10 Janv. 2025',t:'🧪',s:'198 KB'},
+    {n:'ECG + Holter 24h',d:'02 Janv. 2025',t:'🫀',s:'1.2 MB'},
+  ].map(p=>`<div class="record-item"><div class="record-file-icon" style="background:var(--amber-dim)">${p.t}</div>
+    <div><div class="record-name">${p.n}</div><div class="record-date">${p.d}</div></div>
+    <span class="record-size">${p.s}</span></div>`).join('');
+  if(an) an.innerHTML = [
+    {l:'Hypertension artérielle',s:'2019',i:'🫀'},
+    {l:'Diabète type 2',s:'2021',i:'🩸'},
+    {l:'Hypercholestérolémie',s:'2022',i:'💛'},
+    {l:'Rhinite allergique',s:'2010',i:'🌿'},
+  ].map(a=>`<div class="record-item"><div class="record-file-icon" style="background:rgba(0,0,0,.2)">${a.i}</div>
+    <div><div class="record-name">${a.l}</div><div class="record-date">Depuis ${a.s}</div></div></div>`).join('');
+  if(al2) al2.innerHTML = ['Pénicilline (forte)','Aspirine (légère)','Latex','Arachides','Sulfamides'].map(x=>
+    `<span style="background:var(--red-dim);color:var(--red);border:1px solid rgba(255,92,122,.2);padding:5px 13px;border-radius:99px;font-size:.76rem;font-weight:600">⚠️ ${x}</span>`).join('');
+}
+
+/* Calendar */
+let calDate = new Date();
+const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+function renderCal(){
+  const y=calDate.getFullYear(),m=calDate.getMonth();
+  const el=document.getElementById('calMonth');
+  const gr=document.getElementById('calGrid');
+  if(!el||!gr) return;
+  el.textContent=MONTHS[m]+' '+y;
+  const first=new Date(y,m,1).getDay();
+  const off=first===0?6:first-1;
+  const days=new Date(y,m+1,0).getDate();
+  const td=new Date();
+  let html='';
+  for(let i=0;i<off;i++) html+='<div class="cal-day other"></div>';
+  for(let d=1;d<=days;d++){
+    const isT=d===td.getDate()&&m===td.getMonth()&&y===td.getFullYear();
+    const hasA=RDV_DATA.some(r=>{const rd=new Date(r.date);return rd.getDate()===d&&rd.getMonth()===m&&rd.getFullYear()===y});
+    html+=`<div class="cal-day${isT?' today':''}${hasA?' has-appt':''}" onclick="selectDay(this)">${d}</div>`;
+  }
+  gr.innerHTML=html;
+}
+function selectDay(el){document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));el.classList.add('selected')}
+function prevMonth(){calDate.setMonth(calDate.getMonth()-1);renderCal()}
+function nextMonth(){calDate.setMonth(calDate.getMonth()+1);renderCal()}
+function renderNextAppts(){
+  const el=document.getElementById('nextAppts');
+  if(!el) return;
+  el.innerHTML=RDV_DATA.filter(r=>r.statut!=='passé').slice(0,3).map(r=>`
+    <div style="padding:9px 0;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:9px">
+      <div style="width:7px;height:7px;border-radius:50%;background:#${r.color};flex-shrink:0"></div>
+      <div>
+        <div style="font-size:.82rem;color:var(--snow);font-weight:500">${r.dr}</div>
+        <div style="font-size:.7rem;color:var(--muted)">${new Date(r.date).toLocaleDateString('fr-FR',{day:'numeric',month:'short'})} à ${r.heure}</div>
+      </div>
+    </div>`).join('');
+}
+
+/* ══════════════════════════════════════════════════════════
+   MODAL + TOAST
+══════════════════════════════════════════════════════════ */
+let rdvFilter='tous';
+function filterRdv(f,btn){
+  rdvFilter=f;
+  document.querySelectorAll('.rdv-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderRdv(f);
+}
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(e,id){if(e.target.id===id)document.getElementById(id).classList.remove('open')}
+function saveRdv(){
+  const dr=document.getElementById('rdvDr').value||'Médecin non spécifié';
+  const dt=document.getElementById('rdvDate').value;
+  const tm=document.getElementById('rdvTime').value;
+  const sp=document.getElementById('rdvSpec').value;
+  const mo=document.getElementById('rdvMotif').value||'Consultation';
+  if(dt&&tm){RDV_DATA.unshift({dr,spec:sp,lieu:'À définir',date:dt,heure:tm,statut:'en attente',motif:mo,ini:dr.slice(0,2).toUpperCase(),color:'00E5CC'});renderRdv(rdvFilter);renderNextAppts();renderCal();}
+  document.getElementById('rdvModal').classList.remove('open');
+  showToast('RDV enregistré','Votre demande a été soumise','var(--green)','calendar-check');
+}
+function saveMed(){document.getElementById('medModal').classList.remove('open');showToast('Médicament ajouté','Traitement enregistré','var(--cyan)','pill')}
+function toggleMed(el){el.classList.toggle('done');if(el.classList.contains('done'))showToast('Prise enregistrée','Médicament marqué comme pris','var(--green)','check-circle')}
+
+function showToast(title,msg,color,icon){
+  const w=document.getElementById('toastWrap');
+  const t=document.createElement('div');
+  t.className='toast';
+  t.innerHTML=`<div class="toast-icon" style="background:rgba(0,0,0,.4);border:1px solid ${color}30">
+    <i data-lucide="${icon}" style="width:15px;height:15px;color:${color}"></i></div>
+    <div><div class="toast-title">${title}</div><div class="toast-msg">${msg}</div></div>`;
+  w.appendChild(t);lucide.createIcons();
+  setTimeout(()=>{t.style.cssText='opacity:0;transform:translateX(36px);transition:.3s ease';setTimeout(()=>t.remove(),320)},4200);
+}
+
+function updateDate(){
+  const el=document.getElementById('dashDate');
+  if(!el) return;
+  const now=new Date();
+  const s=now.toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  el.textContent=s.charAt(0).toUpperCase()+s.slice(1)+' — Voici votre bilan santé du jour';
+}
+
+/* ══════════════════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════════════════ */
+function initApp(){
+  lucide.createIcons();
+  updateDate();
+  renderMetrics();
+  renderRdv('tous');
+  renderNextAppts();
+  renderCal();
+  renderDossier();
+  renderMeds();
+  renderWeekBars();
+  renderConseils();
+  renderPharms();
+  renderPharmStats();
+  updatePharmClock();
+  setInterval(updatePharmClock, 1000);
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  lucide.createIcons();
+});
+
+</script>
+</body>
+</html>
